@@ -35,7 +35,8 @@ export default {
             requester: message.member.displayName,
             resource: result,
           });
-          if (!message.member.voice.connection)
+          console.log(message.guild.voice);
+          if (!message.guild.voice)
             message.member.voice.channel.join().then((connection) => {
               play(connection, message);
             });
