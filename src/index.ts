@@ -4,7 +4,8 @@ config();
 import { Client } from "discord.js";
 
 import { prefix } from "./constant/config";
-import { getAudioUrl } from "./services/youtube";
+
+import play from "./actions/play";
 
 const client = new Client();
 const token = process.env.TOKEN;
@@ -27,15 +28,8 @@ client.on("message", (message) => {
   const content = message.content.substring(prefix.length + args[0].length);
 
   switch (args[0]) {
-    case "play":
-      if (!content)
-        message.channel.send(
-          "❌ You need to provide an Youtube URL or name of video\n\n✅ Ex: !play Shape of You"
-        );
-      else
-        getAudioUrl(content)
-          .then((result) => message.channel.send(result))
-          .catch((e) => message.channel.send(e));
+    case play.name:
+      play.execute(message, content);
       break;
   }
 });
