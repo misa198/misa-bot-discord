@@ -4,6 +4,7 @@ import { prefix } from "./constant/config";
 import play from "./actions/play";
 import skip from "./actions/skip";
 import nowplaying from "./actions/nowplaying";
+import pause from "./actions/pause";
 
 const bot = (): void => {
   const client = new Client();
@@ -22,6 +23,9 @@ const bot = (): void => {
         break;
       case nowplaying.name.toString():
         nowplaying.execute(message);
+        break;
+      case pause.name:
+        pause.execute(message);
         break;
     }
   });
