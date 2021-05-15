@@ -1,6 +1,5 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message } from "discord.js";
 
-import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
 
 export default {
