@@ -7,7 +7,7 @@ export default {
   execute: (message: Message): void => {
     const server = servers[message.guild.id];
     if (server) {
-      if (server.dispatcher) {
+      if (server.dispatcher && server.playing) {
         message.channel.send("⏸ Paused").then(() => server.dispatcher.pause());
       }
     } else message.channel.send("❌ Nothing to pause!");

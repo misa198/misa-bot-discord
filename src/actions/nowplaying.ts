@@ -1,7 +1,5 @@
 import { Message, MessageEmbed } from "discord.js";
 
-import { audioProgressBar } from "../utils/audio-progress-bar";
-
 import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
 
@@ -19,13 +17,6 @@ export default {
           .setTitle(song.resource.title)
           .setAuthor(`Playing 🎵 `)
           .setThumbnail(song.resource.thumbnail)
-          .addFields({
-            name: "-",
-            value: audioProgressBar(
-              new Date().getTime() - server.playing.startedAt,
-              song.resource.length
-            ),
-          })
           .addFields(
             { name: "Channel", value: song.resource.author, inline: true },
             {
@@ -34,8 +25,7 @@ export default {
               inline: true,
             }
           )
-          .setImage(song.resource.avatar);
-
+          .setImage(song.resource.avatar)
         message.channel.send(messageEmbed);
       }
     } else {

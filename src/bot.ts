@@ -5,6 +5,7 @@ import play from "./actions/play";
 import skip from "./actions/skip";
 import nowplaying from "./actions/nowplaying";
 import pause from "./actions/pause";
+import resume from "./actions/resume";
 
 const bot = (): void => {
   const client = new Client();
@@ -26,6 +27,9 @@ const bot = (): void => {
         break;
       case pause.name:
         pause.execute(message);
+        break;
+      case resume.name:
+        resume.execute(message);
         break;
     }
   });
