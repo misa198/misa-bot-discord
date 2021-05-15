@@ -17,7 +17,7 @@ const Home = () => {
     <HomeWrapper>
       <Introduce>
         <IntroduceTitle>{"NEW & IMPROVED"}</IntroduceTitle>
-        <IntroduceBrand>You, your friends, and some good tunes.</IntroduceBrand>
+        <IntroduceBrand>You, your friends, and some good tunes</IntroduceBrand>
         <IntroduceDescription>
           Misa makes it possible to listen to your favorite music with all your
           friends. Add it to Discord today and start listening!
