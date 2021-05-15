@@ -13,7 +13,7 @@ export default {
           for (let i = server.queue.length - 1; i >= 0; i--) {
             server.queue.splice(i, 1);
           }
-
+          server.playing = null;
           server.dispatcher.end();
           message.channel.send("Ending and leave voice channel!");
         }

@@ -9,7 +9,7 @@ export default {
     if (server) {
       if (server.dispatcher && server.playing) {
         message.channel.send("⏯ Resume").then(() => server.dispatcher.resume());
-      }
+      } else message.channel.send("❌ Nothing to resume!");
     } else message.channel.send("❌ Nothing to resume!");
   },
 };
