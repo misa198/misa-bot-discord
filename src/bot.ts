@@ -6,6 +6,7 @@ import skip from "./actions/skip";
 import nowplaying from "./actions/nowplaying";
 import pause from "./actions/pause";
 import resume from "./actions/resume";
+import stop from "./actions/stop";
 
 const bot = (): void => {
   const client = new Client();
@@ -30,6 +31,9 @@ const bot = (): void => {
         break;
       case resume.name:
         resume.execute(message);
+        break;
+      case stop.name:
+        stop.execute(message);
         break;
       // More short command
       case "np":
