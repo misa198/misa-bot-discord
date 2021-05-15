@@ -52,7 +52,7 @@ export const getAudioUrl = async (content: string): Promise<Resource> => {
         url: string;
       };
       return {
-        youtube: url,
+        youtube: `https://youtu.be/${id}`,
         audio: audio.url,
       };
     })

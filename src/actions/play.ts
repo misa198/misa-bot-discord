@@ -1,11 +1,14 @@
 import { Message, VoiceConnection } from "discord.js";
+import _ from "lodash";
 
 import { servers } from "../data/server";
 import { getAudioUrl } from "../services/youtube";
 
 const play = (connection: VoiceConnection, message: Message) => {
   const server = servers[message.guild.id];
-  server.dispatcher = connection.play(server.queue[0].resource.audio);
+  const song = _.cloneDeep(server.queue[0]);
+
+  server.dispatcher = connection.play(song.resource.audio);
   server.queue.shift();
   server.dispatcher.on("finish", () => {
     if (server.queue[0]) play(connection, message);
@@ -35,9 +38,15 @@ export default {
             requester: message.member.displayName,
             resource: result,
           });
-          if (!message.guild.voice)
-            message.member.voice.channel.join().then((connection) => {
-              play(connection, message);
+          message.channel
+            .send(
+              `🎥 Video: ${result.youtube}\n😼 Ordered by ${message.member.displayName}`
+            )
+            .then(() => {
+              if (!message.guild.voice)
+                message.member.voice.channel.join().then((connection) => {
+                  play(connection, message);
+                });
             });
         })
         .catch((e) => {

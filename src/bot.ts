@@ -18,6 +18,7 @@ const bot = (): void => {
         break;
       case skip.name:
         skip.execute(message);
+        break;
     }
   });
 
