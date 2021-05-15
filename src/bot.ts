@@ -31,6 +31,12 @@ const bot = (): void => {
       case resume.name:
         resume.execute(message);
         break;
+      // More short command
+      case "np":
+        nowplaying.execute(message);
+        break;
+      case "fs":
+        skip.execute(message);
     }
   });
 
