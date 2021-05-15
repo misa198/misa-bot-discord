@@ -6,6 +6,7 @@ import { AppWrapper } from "./styled";
 import Header from "./components/Header";
 
 const Home = lazy(() => import("./containers/Home"));
+const Docs = lazy(() => import("./containers/Docs"));
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Header />
         <Suspense fallback={<></>}>
           <Route exact path="/" component={Home} />
+          <Route exact path="/docs" component={Docs} />
         </Suspense>
       </AppWrapper>
     </BrowserRouter>
