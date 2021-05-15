@@ -25,9 +25,9 @@ export const HeaderNavLinks = styled.div`
   }
 `;
 
-export const HeaderNavLink = styled.div`
+export const HeaderNavLink = styled.div<{ currentLocation: boolean }>`
   margin: 0 8px;
-
+  ${(props) => (props.currentLocation ? "text-decoration: underline;" : "")}
   :hover {
     text-decoration: underline;
   }

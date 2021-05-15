@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, withRouter } from "react-router-dom";
 
 import {
   HeaderWrapper,
@@ -11,25 +11,27 @@ import {
 import LogoImage from "../../assets/logo.png";
 import GithubLogoImage from "../../assets/github.png";
 
-const App = () => {
+const Header = () => {
+  const location = useLocation();
+
   return (
     <HeaderWrapper>
       <Link to="/">
         <HeaderLogo src={LogoImage} alt="logo" />
       </Link>
       <HeaderNavLinks>
-        <HeaderNavLink>
+        <HeaderNavLink currentLocation={location.pathname === "/"}>
           <Link to="/">Home</Link>
         </HeaderNavLink>
-        <HeaderNavLink>
+        <HeaderNavLink currentLocation={location.pathname === "/docs"}>
           <Link to="/docs">Docs</Link>
         </HeaderNavLink>
       </HeaderNavLinks>
-      <a href="github.com" target="__blank">
+      <a href="https://github.com/Misabot/misabot-discord" target="__blank">
         <HeaderGithubLogo src={GithubLogoImage} alt="github" />
       </a>
     </HeaderWrapper>
   );
 };
 
-export default App;
+export default withRouter(Header);
