@@ -6,6 +6,7 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
+    "express": "^4.17.1",
     "ffmpeg-static": "^4.3.0",
     "opusscript": "^0.0.8",
     "ytdl-core": "^4.8.0",
@@ -21,6 +22,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "@types/node": "^15.3.0",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",

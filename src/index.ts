@@ -1,35 +1,13 @@
 import { config } from "dotenv";
 config();
 
-import { Client } from "discord.js";
+import express from "express";
+import bot from "./bot";
 
-import { prefix } from "./constant/config";
-import play from "./actions/play";
+const port = process.env.PORT || 3000;
+const server = express();
 
-const client = new Client();
-const token = process.env.TOKEN;
-
-client.on("message", (message) => {
-  const args = message.content.substring(prefix.length).split(" ");
-  const content = message.content.substring(prefix.length + args[0].length);
-
-  switch (args[0]) {
-    case play.name:
-      play.execute(message, content);
-      break;
-  }
-});
-
-client.login(token);
-
-client.on("ready", () => {
-  console.log("🚀 Misabox is online! ✨");
-});
-
-client.once("reconnecting", () => {
-  console.log("🔗 Reconnecting!");
-});
-
-client.once("disconnect", () => {
-  console.log("🛑 Disconnect!");
+server.listen(port, () => {
+  bot();
+  console.log(`🚀 Server is running on port ${port} ✨`);
 });
