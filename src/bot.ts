@@ -2,6 +2,7 @@ import { Client } from "discord.js";
 
 import { prefix } from "./constant/config";
 import play from "./actions/play";
+import skip from "./actions/skip";
 
 const bot = (): void => {
   const client = new Client();
@@ -15,6 +16,8 @@ const bot = (): void => {
       case play.name:
         play.execute(message, content);
         break;
+      case skip.name:
+        skip.execute(message);
     }
   });
 

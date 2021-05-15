@@ -35,7 +35,6 @@ export default {
             requester: message.member.displayName,
             resource: result,
           });
-          console.log(message.guild.voice);
           if (!message.guild.voice)
             message.member.voice.channel.join().then((connection) => {
               play(connection, message);
