@@ -46,6 +46,7 @@ const bot = (): void => {
           break;
         case "fs":
           skip.execute(message);
+          break;
       }
     }
   });
