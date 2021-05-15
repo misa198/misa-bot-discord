@@ -17,7 +17,7 @@ export default {
           const messageEmbed = new MessageEmbed()
             .setColor("#0099ff")
             .setTitle(song.resource.title)
-            .setAuthor(`Skipped`)
+            .setAuthor(`Skipped by ${message.member.displayName}`)
             .setThumbnail(song.resource.thumbnail)
             .addFields(
               { name: "Channel", value: song.resource.author, inline: true },
