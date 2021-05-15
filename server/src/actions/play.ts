@@ -17,7 +17,11 @@ const play = (connection: VoiceConnection, message: Message) => {
   server.queue.shift();
   server.dispatcher.on("finish", () => {
     if (server.queue[0]) play(connection, message);
-    else connection.disconnect();
+    else {
+      server.playing = null;
+      server.queue = [];
+      connection.disconnect();
+    }
   });
 };
 
