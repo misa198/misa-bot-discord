@@ -1,7 +1,8 @@
 import ytsr from "ytsr";
 import ytdl from "ytdl-core";
+import ytpl from "ytpl";
 
-import { youtubeVideoRegex, audioRegex } from "../constant/regex";
+import { youtubeVideoRegex } from "../constant/regex";
 
 const searchVideo = (keyword: string) => {
   try {
@@ -26,12 +27,11 @@ export interface Resource {
   title: string;
   length: number;
   author: string;
-  avatar: string;
-  audio: string;
   thumbnail: string;
+  url: string;
 }
 
-export const getAudioUrl = async (content: string): Promise<Resource> => {
+export const getVideoDetails = async (content: string): Promise<Resource> => {
   const parsedContent = content.match(youtubeVideoRegex);
   let id = "";
 
@@ -45,29 +45,52 @@ export const getAudioUrl = async (content: string): Promise<Resource> => {
   return ytdl
     .getInfo(url)
     .then((result) => {
-      const resources = result.player_response.streamingData.adaptiveFormats;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const audios = resources.filter((resource: any) =>
-        resource.mimeType.match(audioRegex)
-      );
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      audios.sort((audio: any) => audio.averageBitrate);
-      const audio = audios[0] as {
-        url: string;
-      };
       return {
         title: result.videoDetails.title,
         length: parseInt(result.videoDetails.lengthSeconds, 10),
         author: result.videoDetails.author.name,
-        avatar: result.videoDetails.author.thumbnails[0].url,
         thumbnail:
           result.videoDetails.thumbnails[
             result.videoDetails.thumbnails.length - 1
           ].url,
-        audio: audio.url,
+        url,
       };
     })
     .catch(() => {
       throw "❌ Error";
     });
+};
+
+interface Playlist {
+  title: string;
+  thumbnail: string;
+  author: string;
+  resources: Resource[];
+}
+
+export const getPlaylist = async (url: string): Promise<Playlist> => {
+  try {
+    const id = url.split("?")[1].split("=")[1];
+    const playlist = await ytpl(id);
+
+    const resources: Resource[] = [];
+    playlist.items.forEach((item) => {
+      resources.push({
+        title: item.title,
+        thumbnail: item.bestThumbnail.url,
+        author: item.author.name,
+        url: item.shortUrl,
+        length: item.durationSec,
+      });
+    });
+
+    return {
+      title: playlist.title,
+      thumbnail: playlist.bestThumbnail.url,
+      author: playlist.author.name,
+      resources,
+    };
+  } catch (e) {
+    throw "❌ Invalid playlist!";
+  }
 };

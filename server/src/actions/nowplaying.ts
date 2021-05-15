@@ -25,7 +25,6 @@ export default {
               inline: true,
             }
           )
-          .setImage(song.resource.avatar)
         message.channel.send(messageEmbed);
       }
     } else {
