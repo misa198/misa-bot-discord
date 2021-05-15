@@ -23,6 +23,7 @@ export const Introduce = styled.div`
   ${down("md")} {
     width: 100%;
     padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
