@@ -6,4 +6,14 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
+
+  body {
+    color: #ffffff;
+    font-family: 'Poppins', serif; 
+  }
+
+  a{
+    text-decoration: none;
+    color: #ffffff;
+  }
 `;
