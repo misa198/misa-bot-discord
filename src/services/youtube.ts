@@ -22,7 +22,12 @@ const searchVideo = (keyword: string) => {
   }
 };
 
-export const checkVideo = async (content: string): Promise<string> => {
+export interface Resource {
+  audio: string;
+  youtube: string;
+}
+
+export const getAudioUrl = async (content: string): Promise<Resource> => {
   const parsedContent = content.match(youtubeVideoRegex);
   let id = "";
 
@@ -31,11 +36,26 @@ export const checkVideo = async (content: string): Promise<string> => {
   } else {
     id = parsedContent[1];
   }
-
   const url = `https://www.youtube.com/watch?v=${id}`;
+
   return ytdl
     .getInfo(url)
-    .then(() => url)
+    .then((result) => {
+      const resources = result.player_response.streamingData.adaptiveFormats;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const audios = resources.filter((resource: any) =>
+        resource.mimeType.match(audioRegex)
+      );
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      audios.sort((audio: any) => audio.averageBitrate);
+      const audio = audios[0] as {
+        url: string;
+      };
+      return {
+        youtube: url,
+        audio: audio.url,
+      };
+    })
     .catch(() => {
       throw "❌ Error";
     });

@@ -1,13 +1,15 @@
 import { StreamDispatcher } from "discord.js";
 
-interface Song {
+import { Resource } from "../services/youtube";
+
+export interface Song {
   requester: string;
-  url: string;
+  resource: Resource;
 }
 
 interface Server {
   [key: string]: {
-    queue: string[];
+    queue: Song[];
     dispatcher?: StreamDispatcher;
   };
 }

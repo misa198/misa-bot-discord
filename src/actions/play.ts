@@ -1,14 +1,11 @@
-import ytdl from "ytdl-core";
 import { Message, VoiceConnection } from "discord.js";
 
 import { servers } from "../data/server";
-import { checkVideo } from "../services/youtube";
+import { getAudioUrl } from "../services/youtube";
 
 const play = (connection: VoiceConnection, message: Message) => {
   const server = servers[message.guild.id];
-  server.dispatcher = connection.play(
-    ytdl(server.queue[0], { filter: "audioonly" })
-  );
+  server.dispatcher = connection.play(server.queue[0].resource.audio);
   server.queue.shift();
   server.dispatcher.on("finish", () => {
     if (server.queue[0]) play(connection, message);
@@ -18,7 +15,7 @@ const play = (connection: VoiceConnection, message: Message) => {
 
 export default {
   name: "play",
-  execute: (message: Message, content: string) => {
+  execute: (message: Message, content: string): void => {
     if (!content)
       message.channel.send(
         "❌ You need to provide an Youtube URL or name of video\n\n✅ Ex: !play Shape of You"
@@ -32,9 +29,12 @@ export default {
         };
       const server = servers[message.guild.id];
 
-      checkVideo(content)
+      getAudioUrl(content)
         .then((result) => {
-          server.queue.push(result);
+          server.queue.push({
+            requester: message.member.displayName,
+            resource: result,
+          });
           if (!message.member.voice.connection)
             message.member.voice.channel.join().then((connection) => {
               play(connection, message);
