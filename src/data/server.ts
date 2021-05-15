@@ -9,7 +9,10 @@ export interface Song {
 
 interface Server {
   [key: string]: {
-    playing?: Song;
+    playing?: {
+      song: Song;
+      startedAt: number;
+    };
     queue: Song[];
     dispatcher?: StreamDispatcher;
   };

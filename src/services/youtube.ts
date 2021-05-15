@@ -23,8 +23,12 @@ const searchVideo = (keyword: string) => {
 };
 
 export interface Resource {
+  title: string;
+  length: number;
+  author: string;
+  avatar: string;
   audio: string;
-  youtube: string;
+  thumbnail: string;
 }
 
 export const getAudioUrl = async (content: string): Promise<Resource> => {
@@ -52,7 +56,14 @@ export const getAudioUrl = async (content: string): Promise<Resource> => {
         url: string;
       };
       return {
-        youtube: `https://youtu.be/${id}`,
+        title: result.videoDetails.title,
+        length: parseInt(result.videoDetails.lengthSeconds, 10),
+        author: result.videoDetails.author.name,
+        avatar: result.videoDetails.author.thumbnails[0].url,
+        thumbnail:
+          result.videoDetails.thumbnails[
+            result.videoDetails.thumbnails.length - 1
+          ].url,
         audio: audio.url,
       };
     })
