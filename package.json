@@ -6,6 +6,8 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
+    "ffmpeg-static": "^4.3.0",
+    "opusscript": "^0.0.8",
     "ytdl-core": "^4.8.0",
     "ytsr": "^3.5.0"
   },
