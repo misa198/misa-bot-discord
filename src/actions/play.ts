@@ -47,6 +47,11 @@ export default {
                 message.member.voice.channel.join().then((connection) => {
                   play(connection, message);
                 });
+              else if (!message.guild.voice.connection) {
+                message.member.voice.channel.join().then((connection) => {
+                  play(connection, message);
+                });
+              }
             });
         })
         .catch((e) => {
