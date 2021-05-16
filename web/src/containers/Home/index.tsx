@@ -23,7 +23,7 @@ const Home = () => {
           friends. Add it to Discord today and start listening!
         </IntroduceDescription>
         <InviteButtonWrapper
-          href="https://discord.com/api/oauth2/authorize?client_id=843003904904134667&permissions=2151079744&scope=bot"
+          href=""
           target="__blank"
         >
           <InviteButton>Invite Misa</InviteButton>
