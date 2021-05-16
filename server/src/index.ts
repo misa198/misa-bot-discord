@@ -7,6 +7,7 @@ import bot from "./bot";
 const port = process.env.PORT || 3000;
 const server = express();
 
+server.disable('x-powered-by');
 server.use(express.static(`${__dirname}/../web/build`));
 
 server.get("/*", (_req, res) => {
