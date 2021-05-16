@@ -47,41 +47,47 @@ export default {
 
       const paths = content.match(youtubePlaylistRegex);
       if (paths) {
-        getPlaylist(paths[0]).then((result) => {
-          const resources = result.resources;
-          resources.forEach((resource) => {
-            server.queue.push({
-              requester: message.member.displayName,
-              resource: resource,
+        getPlaylist(paths[0])
+          .then((result) => {
+            const resources = result.resources;
+            resources.forEach((resource) => {
+              server.queue.push({
+                requester: message.member.displayName,
+                resource: resource,
+              });
             });
-          });
 
-          const messageEmbed = new MessageEmbed()
-            .setColor("#0099ff")
-            .setTitle(result.title)
-            .setAuthor(`Add playlist to order by ${message.member.displayName}`)
-            .setThumbnail(result.thumbnail)
-            .addFields(
-              { name: "Author", value: result.author, inline: true },
-              {
-                name: "Video count",
-                value: resources.length,
-                inline: true,
+            const messageEmbed = new MessageEmbed()
+              .setColor("#0099ff")
+              .setTitle(result.title)
+              .setAuthor(
+                `Add playlist to order by ${message.member.displayName}`
+              )
+              .setThumbnail(result.thumbnail)
+              .addFields(
+                { name: "Author", value: result.author, inline: true },
+                {
+                  name: "Video count",
+                  value: resources.length,
+                  inline: true,
+                }
+              );
+
+            message.channel.send(messageEmbed).then(() => {
+              if (!message.guild.voice)
+                message.member.voice.channel.join().then((connection) => {
+                  play(connection, message);
+                });
+              else if (!message.guild.voice.connection) {
+                message.member.voice.channel.join().then((connection) => {
+                  play(connection, message);
+                });
               }
-            );
-
-          message.channel.send(messageEmbed).then(() => {
-            if (!message.guild.voice)
-              message.member.voice.channel.join().then((connection) => {
-                play(connection, message);
-              });
-            else if (!message.guild.voice.connection) {
-              message.member.voice.channel.join().then((connection) => {
-                play(connection, message);
-              });
-            }
+            });
+          })
+          .catch((e) => {
+            message.channel.send(JSON.stringify(e));
           });
-        });
       } else
         getVideoDetails(content)
           .then((result) => {
