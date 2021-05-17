@@ -1,6 +1,9 @@
 # Misabot
 <p align="center">
   <img src="./web/src/assets/logo.png" align="center" />
+  <p align="center" style="font-size: 20px; padding: 0 20%;">
+    Play Music in Discord.
+  </p>
 </p>
 
 ## Invite Misabot
