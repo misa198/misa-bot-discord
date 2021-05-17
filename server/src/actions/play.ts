@@ -16,7 +16,10 @@ const play = (connection: VoiceConnection, message: Message) => {
   };
 
   server.dispatcher = connection.play(
-    ytdl(song.resource.url, { filter: "audioonly" })
+    ytdl(song.resource.url, {
+      filter: "audioonly",
+      highWaterMark: 1024 * 1024 * 3,
+    })
   );
   server.queue.shift();
   server.dispatcher.on("finish", () => {
