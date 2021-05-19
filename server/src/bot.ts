@@ -59,19 +59,19 @@ const bot = (): void => {
     }
   });
 
-  client.login(token);
-
   client.on("ready", () => {
     console.log("🏃‍♀️ Misabot is online! 💨");
   });
 
-  client.once("reconnecting", () => {
+  client.on("reconnecting", () => {
     console.log("🔗 Reconnecting!");
   });
 
-  client.once("disconnect", () => {
+  client.on("disconnect", () => {
     console.log("🛑 Disconnect!");
   });
+
+  client.login(token);
 };
 
 export default bot;
