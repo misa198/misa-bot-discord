@@ -77,6 +77,7 @@ export const InviteButton = styled.button`
   );
   color: #eef1f5;
   padding: 14px 28px;
+  margin-bottom: 1.5rem;
   border-radius: 4px;
   font-weight: 600;
   display: inline-block;
