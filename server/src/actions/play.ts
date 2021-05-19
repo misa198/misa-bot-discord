@@ -34,7 +34,7 @@ const play = (connection: VoiceConnection, message: Message) => {
     })
   );
   server.dispatcher.on("finish", () => {
-    if (server.queue[0]) play(connection, message);
+    if (server.queue[0] || server.playing?.loop) play(connection, message);
     else {
       server.playing = null;
       server.queue = [];
