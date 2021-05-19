@@ -12,7 +12,6 @@ const play = (connection: VoiceConnection, message: Message) => {
   const song = _.cloneDeep(server.queue[0]);
   server.playing = {
     song,
-    startedAt: new Date().getTime(),
   };
 
   server.dispatcher = connection.play(

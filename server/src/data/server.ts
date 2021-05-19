@@ -11,7 +11,6 @@ interface Server {
   [key: string]: {
     playing?: {
       song: Song;
-      startedAt: number;
     };
     queue: Song[];
     dispatcher?: StreamDispatcher;
