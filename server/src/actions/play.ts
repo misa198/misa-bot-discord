@@ -10,6 +10,7 @@ const play = (connection: VoiceConnection, message: Message) => {
   const server = servers[message.guild.id];
   let song: Song;
   if (!server.playing) {
+    console.log(server.playing);
     song = server.queue[0];
     server.playing = {
       song,
@@ -18,10 +19,6 @@ const play = (connection: VoiceConnection, message: Message) => {
     server.queue.shift();
   } else if (server.playing.loop) {
     song = server.playing.song;
-    server.playing = {
-      song,
-      loop: true,
-    };
   } else {
     song = server.playing.song;
     server.playing = {
