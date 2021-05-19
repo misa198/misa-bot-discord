@@ -28,6 +28,7 @@ export default {
               page = newContent;
             } else {
               page = page.concat(newContent);
+              if (i === queue.length - 1) upNext.push(page);
             }
             i++;
           }
