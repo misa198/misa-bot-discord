@@ -16,7 +16,7 @@ export default {
           .setURL(song.resource.url)
           .setColor("#0099ff")
           .setTitle(song.resource.title)
-          .setAuthor(`Playing 🎵 `)
+          .setAuthor(`🎵 Playing`)
           .setThumbnail(song.resource.thumbnail)
           .addFields(
             { name: "Channel", value: song.resource.author, inline: true },

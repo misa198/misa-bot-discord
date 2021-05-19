@@ -41,7 +41,7 @@ export default {
               .setColor("#0099ff")
               .setTitle("Queue 🎵")
               .addFields({
-                name: "Playing",
+                name: "🎵 Playing",
                 value: `[${server.playing.song.resource.title}](${
                   server.playing.song.resource.url
                 }) | ${formatTimeRange(
@@ -50,13 +50,13 @@ export default {
                 inline: false,
               })
               .addFields({
-                name: "Next",
+                name: "⏩ Next",
                 value: `${item}`,
                 inline: false,
               });
           } else {
             messageEmbed = new MessageEmbed().setColor("#0099ff").addFields({
-              name: "Next",
+              name: "⏩ Next",
               value: `${item}`,
               inline: false,
             });

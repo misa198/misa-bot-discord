@@ -15,7 +15,7 @@ export default {
           .setURL(song.resource.url)
           .setColor("#0099ff")
           .setTitle(song.resource.title)
-          .setAuthor(`Loop by ${message.member.displayName} 🔁`)
+          .setAuthor(`🔁 Loop by ${message.member.displayName}`)
           .setThumbnail(song.resource.thumbnail)
           .addFields(
             { name: "Channel", value: song.resource.author, inline: true },
@@ -31,7 +31,7 @@ export default {
             }
           );
 
-        message.channel.send(messageEmbed).then(() => server.dispatcher.end());
+        message.channel.send(messageEmbed);
       } else {
         message.channel.send("❌ Nothing to loop!");
       }

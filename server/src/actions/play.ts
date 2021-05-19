@@ -80,7 +80,7 @@ export default {
               .setURL(paths[0])
               .setTitle(result.title)
               .setAuthor(
-                `Add playlist to order by ${message.member.displayName}`
+                `➕ Add playlist to order by ${message.member.displayName}`
               )
               .setThumbnail(result.thumbnail)
               .addFields(

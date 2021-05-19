@@ -33,7 +33,7 @@ export default {
               .setURL(song.resource.url)
               .setColor("#0099ff")
               .setTitle(song.resource.title)
-              .setAuthor(`Selected by ${message.member.displayName}`)
+              .setAuthor(`⏺ Selected by ${message.member.displayName}`)
               .setThumbnail(song.resource.thumbnail)
               .addFields(
                 { name: "Channel", value: song.resource.author, inline: true },
