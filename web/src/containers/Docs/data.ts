@@ -35,4 +35,22 @@ export const commands = [
     description: "Get current song info",
     usage: "!nowplaying or !np",
   },
+  {
+    id: 7,
+    name: "!loop",
+    description: "Loop current song",
+    usage: "!loop",
+  },
+  {
+    id: 8,
+    name: "!queue",
+    description: "View songs in queue",
+    usage: "!queue",
+  },
+  {
+    id: 9,
+    name: "!select",
+    description: "Select song by position in queue",
+    usage: "!select <position>",
+  },
 ];
