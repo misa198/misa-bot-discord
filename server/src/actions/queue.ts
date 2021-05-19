@@ -23,7 +23,7 @@ export default {
             }) | ${formatTimeRange(queue[i].resource.length)} | Requested by ${
               queue[i].requester
             }\n`;
-            if (page.length + newContent.length >= 1024) {
+            if (page.length + newContent.length >= 1024 - 20) {
               upNext.push(page);
               page = newContent;
             } else {
