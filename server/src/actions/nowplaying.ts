@@ -28,7 +28,12 @@ export default {
             {
               name: "Order by",
               value: song.requester,
-              inline: false,
+              inline: true,
+            },
+            {
+              name: "Loop",
+              value: server.playing.loop ? "✅ " : "❌",
+              inline: true,
             }
           );
         message.channel.send(messageEmbed);
