@@ -62,6 +62,7 @@ export default {
 
             const messageEmbed = new MessageEmbed()
               .setColor("#0099ff")
+              .setURL(paths[0])
               .setTitle(result.title)
               .setAuthor(
                 `Add playlist to order by ${message.member.displayName}`
@@ -99,6 +100,7 @@ export default {
               resource: result,
             });
             const messageEmbed = new MessageEmbed()
+              .setURL(result.url)
               .setColor("#0099ff")
               .setTitle(result.title)
               .setAuthor(`Add to order by ${message.member.displayName}`)

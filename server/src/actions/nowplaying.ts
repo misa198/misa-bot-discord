@@ -13,6 +13,7 @@ export default {
       } else {
         const song = server.playing.song;
         const messageEmbed = new MessageEmbed()
+          .setURL(song.resource.url)
           .setColor("#0099ff")
           .setTitle(song.resource.title)
           .setAuthor(`Playing 🎵 `)
@@ -23,8 +24,13 @@ export default {
               name: "Length",
               value: formatTimeRange(song.resource.length),
               inline: true,
+            },
+            {
+              name: "Order by",
+              value: song.requester,
+              inline: false,
             }
-          )
+          );
         message.channel.send(messageEmbed);
       }
     } else {
