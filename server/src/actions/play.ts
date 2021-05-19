@@ -64,12 +64,6 @@ export default {
         getPlaylist(paths[0])
           .then((result) => {
             const resources = result.resources;
-            resources.forEach((resource) => {
-              server.queue.push({
-                requester: message.member.displayName,
-                resource: resource,
-              });
-            });
 
             const messageEmbed = new MessageEmbed()
               .setColor("#0099ff")
@@ -89,13 +83,36 @@ export default {
               );
 
             message.channel.send(messageEmbed).then(() => {
-              if (!message.guild.voice)
+              if (!message.guild.voice) {
+                server.queue = [];
+                resources.forEach((resource) => {
+                  server.queue.push({
+                    requester: message.member.displayName,
+                    resource: resource,
+                  });
+                });
+                server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
                   play(connection, message);
                 });
-              else if (!message.guild.voice.connection) {
+              } else if (!message.guild.voice.connection) {
+                server.queue = [];
+                resources.forEach((resource) => {
+                  server.queue.push({
+                    requester: message.member.displayName,
+                    resource: resource,
+                  });
+                });
+                server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
                   play(connection, message);
+                });
+              } else {
+                resources.forEach((resource) => {
+                  server.queue.push({
+                    requester: message.member.displayName,
+                    resource: resource,
+                  });
                 });
               }
             });
@@ -106,10 +123,6 @@ export default {
       } else
         getVideoDetails(content)
           .then((result) => {
-            server.queue.push({
-              requester: message.member.displayName,
-              resource: result,
-            });
             const messageEmbed = new MessageEmbed()
               .setURL(result.url)
               .setColor("#0099ff")
@@ -127,13 +140,30 @@ export default {
               .addField("Position in order", server.queue.length, true);
 
             message.channel.send(messageEmbed).then(() => {
-              if (!message.guild.voice)
+              if (!message.guild.voice) {
+                server.queue = [];
+                server.queue.push({
+                  requester: message.member.displayName,
+                  resource: result,
+                });
+                server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
                   play(connection, message);
                 });
-              else if (!message.guild.voice.connection) {
+              } else if (!message.guild.voice.connection) {
+                server.queue = [];
+                server.queue.push({
+                  requester: message.member.displayName,
+                  resource: result,
+                });
+                server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
                   play(connection, message);
+                });
+              } else {
+                server.queue.push({
+                  requester: message.member.displayName,
+                  resource: result,
                 });
               }
             });
