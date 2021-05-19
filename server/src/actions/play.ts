@@ -19,7 +19,7 @@ const play = (connection: VoiceConnection, message: Message) => {
   } else if (server.playing.loop) {
     song = server.playing.song;
   } else {
-    song = server.playing.song;
+    song = server.queue[0];
     server.playing = {
       song,
       loop: false,
