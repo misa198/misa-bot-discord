@@ -9,6 +9,19 @@
 ## Invite Misabot
 Meet Misabot [here](https://misabotapp.herokuapp.com).
 
+
+## Docs
+| ID | Name             | Description                             | Usage              |
+|----|------------------|-----------------------------------------|--------------------|
+| 1  | !play            | Plays a song with the given name or url | !play <link/query> |
+| 2  | !pause           | Pause current song                      | !pause             |
+| 3  | !resume          | Resume current song                     | !resume            |
+| 4  | !skip, !fs       | Skip current song                       | !skip or !fs       |
+| 5  | !stop            | Stop and leave audio channel            | !stop              |
+| 6  | !nowplaying, !np | Get current song info                   | !nowplaying or !np |
+| 7  | !loop            | Loop current song                       | !loop              |
+| 8  | !queue           | View songs in queue                     | !queue             |
+| 9  | !select          | Select song by position in queue        | !select <position> |
 ## Guild
 Guild to build Misabot [here](https://viblo.asia/p/tao-mot-discord-bot-phat-nhac-don-gian-bang-nodejs-typescript-va-deploy-len-heroku-Qbq5QE935D8).
 
