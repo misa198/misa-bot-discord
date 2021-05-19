@@ -48,7 +48,7 @@ export default {
                   inline: false,
                 }
               );
-
+            server.playing = null;
             message.channel
               .send(messageEmbed)
               .then(() => server.dispatcher.end());
