@@ -19,13 +19,16 @@ const bot = (): void => {
 
     if (message.content[0] === "!") {
       switch (args[0]) {
+        case "p":
         case play.name:
           play.execute(message, content);
           break;
         case skip.name:
+        case "fs":
           skip.execute(message);
           break;
-        case nowplaying.name.toString():
+        case nowplaying.name:
+        case "np":
           nowplaying.execute(message);
           break;
         case pause.name:
@@ -39,13 +42,6 @@ const bot = (): void => {
           break;
         case clear.name:
           clear.execute(message);
-          break;
-        // More short command
-        case "np":
-          nowplaying.execute(message);
-          break;
-        case "fs":
-          skip.execute(message);
           break;
       }
     }

@@ -4,7 +4,7 @@ import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
 
 export default {
-  name: ["nowplaying"],
+  name: "nowplaying",
   execute: (message: Message): void => {
     const server = servers[message.guild.id];
     if (server) {
