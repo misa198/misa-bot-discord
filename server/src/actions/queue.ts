@@ -18,17 +18,16 @@ export default {
         if (queue.length > 0) {
           let i = 0;
           while (i < queue.length) {
-            if (i % 5 === 4) {
+            const newContent = `${i + 1}. [${queue[i].resource.title}](${
+              queue[i].resource.url
+            }) | ${formatTimeRange(queue[i].resource.length)} | Requested by ${
+              queue[i].requester
+            }\n`;
+            if (page.length + newContent.length >= 1024) {
               upNext.push(page);
-              page = "";
+              page = newContent;
             } else {
-              page = page.concat(
-                `${i + 1}. [${queue[i].resource.title}](${
-                  queue[i].resource.url
-                }) | ${formatTimeRange(
-                  queue[i].resource.length
-                )} | Requested by ${queue[i].requester}\n`
-              );
+              page = page.concat(newContent);
             }
             i++;
           }
