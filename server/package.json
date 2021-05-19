@@ -9,7 +9,6 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.3.0",
-    "lodash": "^4.17.21",
     "opusscript": "^0.0.8",
     "ytdl-core": "^4.8.0",
     "ytpl": "^2.2.1",

@@ -11,6 +11,7 @@ interface Server {
   [key: string]: {
     playing?: {
       song: Song;
+      loop: boolean;
     };
     queue: Song[];
     dispatcher?: StreamDispatcher;

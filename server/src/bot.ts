@@ -10,6 +10,7 @@ import stop from "./actions/stop";
 import clear from "./actions/clear";
 import queue from "./actions/queue";
 import select from "./actions/select";
+import loop from "./actions/loop";
 
 const bot = (): void => {
   const client = new Client();
@@ -50,6 +51,9 @@ const bot = (): void => {
           break;
         case select.name:
           select.execute(message, content);
+          break;
+        case loop.name:
+          loop.execute(message);
           break;
       }
     }

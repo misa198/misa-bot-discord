@@ -1,18 +1,35 @@
 import { Message, VoiceConnection, MessageEmbed } from "discord.js";
-import _ from "lodash";
 import ytdl from "ytdl-core";
 
-import { servers } from "../data/server";
+import { servers, Song } from "../data/server";
 import { getVideoDetails, getPlaylist } from "../services/youtube";
 import { formatTimeRange } from "../utils/time";
 import { youtubePlaylistRegex } from "../constant/regex";
 
 const play = (connection: VoiceConnection, message: Message) => {
   const server = servers[message.guild.id];
-  const song = _.cloneDeep(server.queue[0]);
-  server.playing = {
-    song,
-  };
+  let song: Song;
+  if (!server.playing) {
+    song = server.queue[0];
+    server.playing = {
+      song,
+      loop: false,
+    };
+    server.queue.shift();
+  } else if (server.playing.loop) {
+    song = server.playing.song;
+    server.playing = {
+      song,
+      loop: true,
+    };
+  } else {
+    song = server.playing.song;
+    server.playing = {
+      song,
+      loop: false,
+    };
+    server.queue.shift();
+  }
 
   server.dispatcher = connection.play(
     ytdl(song.resource.url, {
@@ -20,7 +37,6 @@ const play = (connection: VoiceConnection, message: Message) => {
       highWaterMark: 1024 * 1024 * 3,
     })
   );
-  server.queue.shift();
   server.dispatcher.on("finish", () => {
     if (server.queue[0]) play(connection, message);
     else {

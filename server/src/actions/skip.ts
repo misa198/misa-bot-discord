@@ -10,8 +10,8 @@ export default {
     if (server) {
       if (server.dispatcher) {
         if (server.queue.length === 0) {
-          server.dispatcher.end();
           server.playing = null;
+          server.dispatcher.end();
           message.channel.send("❌ Nothing to skip!");
         } else {
           const song = server.queue[0];
