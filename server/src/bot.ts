@@ -9,6 +9,7 @@ import resume from "./actions/resume";
 import stop from "./actions/stop";
 import clear from "./actions/clear";
 import queue from "./actions/queue";
+import select from "./actions/select";
 
 const bot = (): void => {
   const client = new Client();
@@ -46,6 +47,9 @@ const bot = (): void => {
           break;
         case queue.name:
           queue.execute(message);
+          break;
+        case select.name:
+          select.execute(message, content);
           break;
       }
     }
