@@ -12,6 +12,11 @@ import queue from "./actions/queue";
 import select from "./actions/select";
 import loop from "./actions/loop";
 
+import {
+  checkUserInVoiceChannel,
+  checkBotInVoiceChannel,
+} from "./utils/check-voice-channel";
+
 const bot = (): void => {
   const client = new Client();
   const token = process.env.TOKEN;
@@ -24,36 +29,58 @@ const bot = (): void => {
       switch (args[0]) {
         case "p":
         case play.name:
-          play.execute(message, content);
+          checkUserInVoiceChannel(message, () =>
+            play.execute(message, content)
+          );
           break;
         case skip.name:
         case "fs":
-          skip.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => skip.execute(message))
+          );
           break;
         case nowplaying.name:
         case "np":
-          nowplaying.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => nowplaying.execute(message))
+          );
           break;
         case pause.name:
-          pause.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => pause.execute(message))
+          );
           break;
         case resume.name:
-          resume.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => resume.execute(message))
+          );
           break;
         case stop.name:
-          stop.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => stop.execute(message))
+          );
           break;
         case clear.name:
-          clear.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => clear.execute(message))
+          );
           break;
         case queue.name:
-          queue.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => queue.execute(message))
+          );
           break;
         case select.name:
-          select.execute(message, content);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () =>
+              select.execute(message, content)
+            )
+          );
           break;
         case loop.name:
-          loop.execute(message);
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () => loop.execute(message))
+          );
           break;
       }
     }

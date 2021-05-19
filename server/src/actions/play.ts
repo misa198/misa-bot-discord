@@ -50,8 +50,6 @@ export default {
       message.channel.send(
         "❌ You need to provide an Youtube URL or name of video\n\n✅ Ex: !play Shape of You"
       );
-    else if (!message.member.voice.channel)
-      message.channel.send("❌ You must be in a voice channel!");
     else {
       if (!servers[message.guild.id])
         servers[message.guild.id] = {
