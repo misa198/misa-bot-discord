@@ -11,6 +11,7 @@ import clear from "./actions/clear";
 import queue from "./actions/queue";
 import select from "./actions/select";
 import loop from "./actions/loop";
+import remove from "./actions/remove";
 
 import {
   checkUserInVoiceChannel,
@@ -80,6 +81,14 @@ const bot = (): void => {
         case loop.name:
           checkUserInVoiceChannel(message, () =>
             checkBotInVoiceChannel(message, () => loop.execute(message))
+          );
+          break;
+        case remove.name:
+        case "rm":
+          checkUserInVoiceChannel(message, () =>
+            checkBotInVoiceChannel(message, () =>
+              remove.execute(message, content)
+            )
           );
           break;
       }
