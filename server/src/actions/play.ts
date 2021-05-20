@@ -135,7 +135,7 @@ export default {
                   inline: true,
                 }
               )
-              .addField("Position in order", server.queue.length, true);
+              .addField("Position in order", server.queue.length + 1, true);
 
             message.channel.send(messageEmbed).then(() => {
               if (!message.guild.voice) {
