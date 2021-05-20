@@ -9,7 +9,7 @@ export const commands = [
     id: 2,
     name: "!pause",
     description: "Pause current song",
-    usage: "!play",
+    usage: "!pause",
   },
   {
     id: 3,
@@ -52,5 +52,11 @@ export const commands = [
     name: "!select",
     description: "Select song by position in queue",
     usage: "!select <position>",
+  },
+  {
+    id: 10,
+    name: "!remove",
+    description: "Remove song by position in queue",
+    usage: "!remove <position>",
   },
 ];
