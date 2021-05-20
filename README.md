@@ -22,6 +22,7 @@ Meet Misabot [here](https://misabotapp.herokuapp.com).
 | 7  | !loop            | Loop current song                       | !loop              |
 | 8  | !queue           | View songs in queue                     | !queue             |
 | 9  | !select          | Select song by position in queue        | !select <position> |
+| 10  | !remove          | Remove song by position in queue        | !remove or !rm <position> |
 ## Guild
 Guild to build Misabot [here](https://viblo.asia/p/tao-mot-discord-bot-phat-nhac-don-gian-bang-nodejs-typescript-va-deploy-len-heroku-Qbq5QE935D8).
 
