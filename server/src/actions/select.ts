@@ -53,9 +53,9 @@ export default {
               .send(messageEmbed)
               .then(() => server.dispatcher.end());
           }
-        } else message.channel.send("❌ Nothing to skip!");
+        } else message.channel.send("❌ Nothing to select!");
       } else {
-        message.channel.send("❌ Nothing to skip!");
+        message.channel.send("❌ Nothing to select!");
       }
     }
   },
