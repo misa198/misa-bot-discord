@@ -21,6 +21,6 @@ export const platforms = {
   },
   [Platform.SOUNDCLOUD.toString()]: {
     uri: soundCloudLogo,
-    name: "Youtube",
+    name: "SoundCloud",
   },
 };

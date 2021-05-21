@@ -47,7 +47,10 @@ export default {
                   server.playing.song.resource.url
                 }) | ${formatTimeRange(
                   server.playing.song.resource.length
-                )} | Requested by ${server.playing.song.requester}`,
+                )} | ${
+                  platforms[server.playing.song.resource.platform.toString()]
+                    .name
+                } | Requested by ${server.playing.song.requester}`,
                 inline: false,
               })
               .addFields({
