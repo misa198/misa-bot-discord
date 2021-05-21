@@ -4,7 +4,6 @@
   "author": "Thanh Vu <misa198>",
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.14.169",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
