@@ -33,8 +33,8 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
     if (track)
       return {
         title: track.title,
-        length: track.duration,
-        author: `${track.user.first_name} ${track.user.last_name}`,
+        length: track.duration / 1000,
+        author: track.user.username,
         thumbnail: track.artwork_url ? track.artwork_url : defaultSCArtWork,
         url,
         platform: Platform.SOUNDCLOUD,
@@ -61,9 +61,9 @@ export const getPlaylist = async (url: string): Promise<Playlist> => {
       resources.push({
         title: track.title,
         thumbnail: track.artwork_url ? track.artwork_url : defaultSCArtWork,
-        author: `${track.user.first_name} ${track.user.last_name}`,
+        author: track.user.username,
         url: `https://soundcloud.com/tracks/${track.id}`,
-        length: track.duration,
+        length: track.duration / 1000,
         platform: Platform.SOUNDCLOUD,
       });
     });
