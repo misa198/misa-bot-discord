@@ -55,7 +55,7 @@ export const getPlaylist = async (url: string): Promise<Playlist> => {
         title: track.title,
         thumbnail: track.artwork_url ? track.artwork_url : defaultSCArtWork,
         author: track.user.username,
-        url: `https://soundcloud.com/tracks/${track.id}`,
+        url: track.permalink_url,
         length: track.duration / 1000,
         platform: Platform.SOUNDCLOUD,
       });
