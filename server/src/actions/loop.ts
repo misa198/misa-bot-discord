@@ -2,6 +2,8 @@ import { Message, MessageEmbed } from "discord.js";
 
 import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
+import { misabotLogo } from "../constant/config";
+import { platforms } from "../services/youtube";
 
 export default {
   name: "loop",
@@ -15,7 +17,10 @@ export default {
           .setURL(song.resource.url)
           .setColor("#0099ff")
           .setTitle(song.resource.title)
-          .setAuthor(`🔁 Loop by ${message.member.displayName}`)
+          .setAuthor(
+            `Loop by ${message.member.displayName} 🔁`,
+            platforms[song.resource.platform.toString()]
+          )
           .setThumbnail(song.resource.thumbnail)
           .addFields(
             { name: "Channel", value: song.resource.author, inline: true },
@@ -29,7 +34,8 @@ export default {
               value: song.requester,
               inline: false,
             }
-          );
+          )
+          .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
 
         message.channel.send(messageEmbed);
       } else {

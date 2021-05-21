@@ -2,6 +2,8 @@ import { Message, MessageEmbed } from "discord.js";
 
 import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
+import { platforms } from "../services/youtube";
+import { misabotLogo } from "../constant/config";
 
 export default {
   name: "skip",
@@ -19,7 +21,10 @@ export default {
             .setURL(song.resource.url)
             .setColor("#0099ff")
             .setTitle(song.resource.title)
-            .setAuthor(`⏩ Skipped by ${message.member.displayName}`)
+            .setAuthor(
+              `Skipped by ${message.member.displayName} ⏩`,
+              platforms[song.resource.platform.toString()]
+            )
             .setThumbnail(song.resource.thumbnail)
             .addFields(
               { name: "Channel", value: song.resource.author, inline: true },
@@ -33,7 +38,8 @@ export default {
                 value: song.requester,
                 inline: false,
               }
-            );
+            )
+            .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
           server.playing = null;
           message.channel
             .send(messageEmbed)
