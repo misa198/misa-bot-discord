@@ -110,7 +110,6 @@ export default {
                 }
               )
               .addField("Position in order", server.queue.length + 1, true)
-              .setImage(platforms[Platform.YOUTUBE.toString()])
               .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
 
             message.channel.send(messageEmbed).then(() => {
