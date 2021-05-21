@@ -38,7 +38,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `➕ Add playlist to order by ${message.member.displayName}`,
-                platforms[Platform.YOUTUBE.toString()]
+                platforms[Platform.YOUTUBE.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(
@@ -98,7 +98,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `Add to order by ${message.member.displayName}`,
-                platforms[Platform.YOUTUBE.toString()]
+                platforms[Platform.YOUTUBE.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(

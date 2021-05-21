@@ -34,7 +34,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `➕ Add playlist to order by ${message.member.displayName}`,
-                platforms[Platform.SOUNDCLOUD.toString()]
+                platforms[Platform.SOUNDCLOUD.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(
@@ -94,7 +94,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `Add to order by ${message.member.displayName}`,
-                platforms[Platform.SOUNDCLOUD.toString()]
+                platforms[Platform.SOUNDCLOUD.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(

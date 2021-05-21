@@ -36,7 +36,7 @@ export default {
               .setTitle(song.resource.title)
               .setAuthor(
                 `Removed by ${message.member.displayName} 🗑`,
-                platforms[song.resource.platform.toString()]
+                platforms[song.resource.platform.toString()].uri
               )
               .setThumbnail(song.resource.thumbnail)
               .addFields(

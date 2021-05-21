@@ -21,8 +21,14 @@ export enum Platform {
 }
 
 export const platforms = {
-  [Platform.YOUTUBE.toString()]: youtubeLogo,
-  [Platform.SOUNDCLOUD.toString()]: soundCloudLogo,
+  [Platform.YOUTUBE.toString()]: {
+    uri: youtubeLogo,
+    name: "Youtube",
+  },
+  [Platform.SOUNDCLOUD.toString()]: {
+    uri: soundCloudLogo,
+    name: "Youtube",
+  },
 };
 
 export interface Resource {
