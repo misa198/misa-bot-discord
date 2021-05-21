@@ -11,3 +11,10 @@ export interface Resource {
   url: string;
   platform: Platform;
 }
+
+export interface Playlist {
+  title: string;
+  thumbnail: string;
+  author: string;
+  resources: Resource[];
+}

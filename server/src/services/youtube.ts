@@ -1,4 +1,4 @@
-import ytsr from "ytsr";
+import ytsr, { Playlist } from "ytsr";
 import ytdl from "ytdl-core";
 import ytpl from "ytpl";
 
@@ -43,13 +43,6 @@ export const getVideoDetails = async (content: string): Promise<Resource> => {
     throw "❌ Can't find anything!";
   }
 };
-
-interface Playlist {
-  title: string;
-  thumbnail: string;
-  author: string;
-  resources: Resource[];
-}
 
 export const getPlaylist = async (url: string): Promise<Playlist> => {
   try {

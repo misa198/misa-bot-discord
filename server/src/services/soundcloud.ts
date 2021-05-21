@@ -2,7 +2,7 @@ import scdl from "soundcloud-downloader";
 
 import { soundcloudTrackRegex } from "../constant/regex";
 import { defaultSCArtWork } from "../constant/config";
-import { Platform, Resource } from "./types";
+import { Platform, Playlist, Resource } from "./types";
 
 const searchTrack = async (keyword: string): Promise<string> => {
   const res = await scdl.search({
@@ -44,13 +44,6 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
     throw "❌ Can't find anything!";
   }
 };
-
-interface Playlist {
-  title: string;
-  thumbnail: string;
-  author: string;
-  resources: Resource[];
-}
 
 export const getPlaylist = async (url: string): Promise<Playlist> => {
   try {
