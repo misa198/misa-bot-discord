@@ -3,6 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
 import { platforms } from "../services/youtube";
+import { misabotLogo } from "../constant/config";
 
 export default {
   name: "nowplaying",
@@ -36,7 +37,8 @@ export default {
               value: server.playing.loop ? "✅ " : "❌",
               inline: true,
             }
-          );
+          )
+          .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
         message.channel.send(messageEmbed);
       }
     } else {
