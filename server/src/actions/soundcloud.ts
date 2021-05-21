@@ -1,19 +1,19 @@
 import { Message, MessageEmbed } from "discord.js";
 
 import { servers } from "../data/server";
-import { getVideoDetails, getPlaylist } from "../services/youtube";
+import { getTrackDetails, getPlaylist } from "../services/soundcloud";
 import { formatTimeRange } from "../utils/time";
-import { youtubePlaylistRegex } from "../constant/regex";
+import { soundcloudPlaylistRegex } from "../constant/regex";
 import { playAudio } from "./playAudio";
-import { misabotLogo, platforms } from "../constant/config";
 import { Platform } from "../services/types";
+import { misabotLogo, platforms } from "../constant/config";
 
 export default {
-  name: "play",
+  name: "soundcloud",
   execute: (message: Message, content: string): void => {
     if (!content)
       message.channel.send(
-        "❌ You need to provide an Youtube URL or name of video\n\n✅ Ex: !play Shape of You"
+        "❌ You need to provide an SoundCloud URL or name of tracks\n\n✅ Ex: !play Shape of You"
       );
     else {
       if (!servers[message.guild.id])
@@ -22,7 +22,7 @@ export default {
         };
       const server = servers[message.guild.id];
 
-      const paths = content.match(youtubePlaylistRegex);
+      const paths = content.match(soundcloudPlaylistRegex);
       if (paths) {
         getPlaylist(paths[0])
           .then((result) => {
@@ -34,7 +34,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `➕ Add playlist to order by ${message.member.displayName}`,
-                platforms[Platform.YOUTUBE.toString()].uri
+                platforms[Platform.SOUNDCLOUD.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(
@@ -86,7 +86,7 @@ export default {
             message.channel.send(JSON.stringify(e));
           });
       } else
-        getVideoDetails(content)
+        getTrackDetails(content)
           .then((result) => {
             const messageEmbed = new MessageEmbed()
               .setURL(result.url)
@@ -94,7 +94,7 @@ export default {
               .setTitle(result.title)
               .setAuthor(
                 `Add to order by ${message.member.displayName}`,
-                platforms[Platform.YOUTUBE.toString()].uri
+                platforms[Platform.SOUNDCLOUD.toString()].uri
               )
               .setThumbnail(result.thumbnail)
               .addFields(
@@ -103,9 +103,13 @@ export default {
                   name: "Length",
                   value: formatTimeRange(result.length),
                   inline: true,
+                },
+                {
+                  name: "Position in order",
+                  value: server.queue.length + 1,
+                  inline: true,
                 }
               )
-              .addField("Position in order", server.queue.length + 1, true)
               .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
 
             message.channel.send(messageEmbed).then(() => {

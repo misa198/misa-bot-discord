@@ -2,6 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { formatTimeRange } from "../utils/time";
 
 import { servers } from "../data/server";
+import { platforms } from "../constant/config";
 
 export default {
   name: "queue",
@@ -20,9 +21,9 @@ export default {
           while (i < queue.length) {
             const newContent = `${i + 1}. [${queue[i].resource.title}](${
               queue[i].resource.url
-            }) | ${formatTimeRange(queue[i].resource.length)} | Requested by ${
-              queue[i].requester
-            }\n`;
+            }) | ${formatTimeRange(queue[i].resource.length)} | ${
+              platforms[queue[i].resource.platform.toString()].name
+            } | Requested by ${queue[i].requester}\n`;
             if (page.length + newContent.length >= 1024 - 20) {
               upNext.push(page);
               page = newContent;

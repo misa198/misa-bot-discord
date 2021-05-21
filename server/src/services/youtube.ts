@@ -3,70 +3,46 @@ import ytdl from "ytdl-core";
 import ytpl from "ytpl";
 
 import { youtubeVideoRegex } from "../constant/regex";
+import { Platform, Resource, Playlist } from "./types";
 
-const searchVideo = (keyword: string) => {
-  try {
-    return ytsr(keyword, { pages: 1 })
-      .then((result) => {
-        const filteredRes = result.items.filter((e) => e.type === "video");
-        if (filteredRes.length === 0) throw "🔎 Can't find video!";
-        const item = filteredRes[0] as {
-          id: string;
-        };
-        return item.id;
-      })
-      .catch((error) => {
-        throw error;
-      });
-  } catch (e) {
-    throw "❌ Invalid params";
-  }
+const searchVideo = async (keyword: string) => {
+  const result = await ytsr(keyword, { pages: 1 });
+  const filteredRes = result.items.filter((e) => e.type === "video");
+  if (filteredRes.length === 0) throw "🔎 Can't find video!";
+  const item = filteredRes[0] as {
+    id: string;
+  };
+  return item.id;
 };
-
-export interface Resource {
-  title: string;
-  length: number;
-  author: string;
-  thumbnail: string;
-  url: string;
-}
 
 export const getVideoDetails = async (content: string): Promise<Resource> => {
   const parsedContent = content.match(youtubeVideoRegex);
   let id = "";
 
-  if (!parsedContent) {
-    id = await searchVideo(content);
-  } else {
-    id = parsedContent[1];
+  try {
+    if (!parsedContent) {
+      id = await searchVideo(content);
+    } else {
+      id = parsedContent[1];
+    }
+    const url = `https://www.youtube.com/watch?v=${id}`;
+
+    const result = await ytdl.getInfo(url);
+    return {
+      title: result.videoDetails.title,
+      length: parseInt(result.videoDetails.lengthSeconds, 10),
+      author: result.videoDetails.author.name,
+      thumbnail:
+        result.videoDetails.thumbnails[
+          result.videoDetails.thumbnails.length - 1
+        ].url,
+      url,
+      platform: Platform.YOUTUBE,
+    };
+  } catch (e) {
+    throw "❌ Can't find anything!";
   }
-  const url = `https://www.youtube.com/watch?v=${id}`;
-
-  return ytdl
-    .getInfo(url)
-    .then((result) => {
-      return {
-        title: result.videoDetails.title,
-        length: parseInt(result.videoDetails.lengthSeconds, 10),
-        author: result.videoDetails.author.name,
-        thumbnail:
-          result.videoDetails.thumbnails[
-            result.videoDetails.thumbnails.length - 1
-          ].url,
-        url,
-      };
-    })
-    .catch(() => {
-      throw "❌ Error";
-    });
 };
-
-interface Playlist {
-  title: string;
-  thumbnail: string;
-  author: string;
-  resources: Resource[];
-}
 
 export const getPlaylist = async (url: string): Promise<Playlist> => {
   try {
@@ -81,6 +57,7 @@ export const getPlaylist = async (url: string): Promise<Playlist> => {
         author: item.author.name,
         url: item.shortUrl,
         length: item.durationSec,
+        platform: Platform.YOUTUBE,
       });
     });
 
@@ -91,6 +68,6 @@ export const getPlaylist = async (url: string): Promise<Playlist> => {
       resources,
     };
   } catch (e) {
-    throw "❌ Invalid playlist!";
+    throw "❌ Can't find anything!";
   }
 };
