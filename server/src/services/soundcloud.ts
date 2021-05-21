@@ -4,7 +4,7 @@ import { soundcloudTrackRegex } from "../constant/regex";
 import { defaultSCArtWork } from "../constant/config";
 import { Platform, Resource } from "./types";
 
-const searchVideo = async (keyword: string): Promise<string> => {
+const searchTrack = async (keyword: string): Promise<string> => {
   const res = await scdl.search({
     query: keyword,
     limit: 10,
@@ -24,7 +24,7 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
   try {
     const paths = content.match(soundcloudTrackRegex);
     if (!paths) {
-      url = await searchVideo(content);
+      url = await searchTrack(content);
     } else {
       url = paths[0];
     }
