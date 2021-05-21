@@ -1,47 +1,10 @@
-import { Message, VoiceConnection, MessageEmbed } from "discord.js";
-import ytdl from "ytdl-core";
+import { Message, MessageEmbed } from "discord.js";
 
-import { servers, Song } from "../data/server";
+import { servers } from "../data/server";
 import { getVideoDetails, getPlaylist } from "../services/youtube";
 import { formatTimeRange } from "../utils/time";
 import { youtubePlaylistRegex } from "../constant/regex";
-
-const play = (connection: VoiceConnection, message: Message) => {
-  const server = servers[message.guild.id];
-  let song: Song;
-  if (!server.playing) {
-    song = server.queue[0];
-    server.playing = {
-      song,
-      loop: false,
-    };
-    server.queue.shift();
-  } else if (server.playing.loop) {
-    song = server.playing.song;
-  } else {
-    song = server.queue[0];
-    server.playing = {
-      song,
-      loop: false,
-    };
-    server.queue.shift();
-  }
-
-  server.dispatcher = connection.play(
-    ytdl(song.resource.url, {
-      filter: "audioonly",
-      highWaterMark: 1024 * 1024 * 3,
-    })
-  );
-  server.dispatcher.on("finish", () => {
-    if (server.queue[0] || server.playing?.loop) play(connection, message);
-    else {
-      server.playing = null;
-      server.queue = [];
-      connection.disconnect();
-    }
-  });
-};
+import { playAudio } from "./playAudio";
 
 export default {
   name: "play",
@@ -91,7 +54,7 @@ export default {
                 });
                 server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
-                  play(connection, message);
+                  playAudio(connection, message);
                 });
               } else if (!message.guild.voice.connection) {
                 server.queue = [];
@@ -103,7 +66,7 @@ export default {
                 });
                 server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
-                  play(connection, message);
+                  playAudio(connection, message);
                 });
               } else {
                 resources.forEach((resource) => {
@@ -146,7 +109,7 @@ export default {
                 });
                 server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
-                  play(connection, message);
+                  playAudio(connection, message);
                 });
               } else if (!message.guild.voice.connection) {
                 server.queue = [];
@@ -156,7 +119,7 @@ export default {
                 });
                 server.playing = null;
                 message.member.voice.channel.join().then((connection) => {
-                  play(connection, message);
+                  playAudio(connection, message);
                 });
               } else {
                 server.queue.push({

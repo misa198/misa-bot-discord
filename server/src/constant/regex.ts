@@ -9,3 +9,7 @@ export const youtubePlaylistRegex = new RegExp(
 export const soundcloudTrackRegex = new RegExp(
   /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)$/
 );
+
+export const soundcloudPlaylistRegex = new RegExp(
+  /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)\/sets\/(.*)$/
+);

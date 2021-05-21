@@ -14,12 +14,18 @@ const searchVideo = async (keyword: string) => {
   return item.id;
 };
 
+export enum Platform {
+  YOUTUBE,
+  SOUNDCLOUD,
+}
+
 export interface Resource {
   title: string;
   length: number;
   author: string;
   thumbnail: string;
   url: string;
+  platform: Platform;
 }
 
 export const getVideoDetails = async (content: string): Promise<Resource> => {
@@ -44,6 +50,7 @@ export const getVideoDetails = async (content: string): Promise<Resource> => {
           result.videoDetails.thumbnails.length - 1
         ].url,
       url,
+      platform: Platform.YOUTUBE,
     };
   } catch (e) {
     throw "❌ Can't find anything!";
@@ -70,6 +77,7 @@ export const getPlaylist = async (url: string): Promise<Playlist> => {
         author: item.author.name,
         url: item.shortUrl,
         length: item.durationSec,
+        platform: Platform.YOUTUBE,
       });
     });
 

@@ -2,6 +2,7 @@ import { Client } from "discord.js";
 
 import { prefix } from "./constant/config";
 import play from "./actions/play";
+import soundcloud from "./actions/soundcloud";
 import skip from "./actions/skip";
 import nowplaying from "./actions/nowplaying";
 import pause from "./actions/pause";
@@ -24,7 +25,9 @@ const bot = (): void => {
 
   client.on("message", (message) => {
     const args = message.content.substring(prefix.length).split(" ");
-    const content = message.content.substring(prefix.length + args[0].length);
+    const content = message.content
+      .substring(prefix.length + args[0].length)
+      .trim();
 
     if (message.content[0] === "!") {
       switch (args[0]) {
@@ -32,6 +35,12 @@ const bot = (): void => {
         case play.name:
           checkUserInVoiceChannel(message, () =>
             play.execute(message, content)
+          );
+          break;
+        case "sc":
+        case soundcloud.name:
+          checkUserInVoiceChannel(message, () =>
+            soundcloud.execute(message, content)
           );
           break;
         case skip.name:

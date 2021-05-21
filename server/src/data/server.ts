@@ -7,7 +7,7 @@ export interface Song {
   resource: Resource;
 }
 
-interface Server {
+export interface Server {
   [key: string]: {
     playing?: {
       song: Song;
