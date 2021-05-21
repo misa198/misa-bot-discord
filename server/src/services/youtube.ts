@@ -3,6 +3,7 @@ import ytdl from "ytdl-core";
 import ytpl from "ytpl";
 
 import { youtubeVideoRegex } from "../constant/regex";
+import { youtubeLogo, soundCloudLogo } from "../constant/config";
 
 const searchVideo = async (keyword: string) => {
   const result = await ytsr(keyword, { pages: 1 });
@@ -18,6 +19,11 @@ export enum Platform {
   YOUTUBE,
   SOUNDCLOUD,
 }
+
+export const platforms = {
+  [Platform.YOUTUBE.toString()]: youtubeLogo,
+  [Platform.SOUNDCLOUD.toString()]: soundCloudLogo,
+};
 
 export interface Resource {
   title: string;

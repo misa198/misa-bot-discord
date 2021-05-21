@@ -1,10 +1,16 @@
 import { Message, MessageEmbed } from "discord.js";
 
 import { servers } from "../data/server";
-import { getVideoDetails, getPlaylist } from "../services/youtube";
+import {
+  getVideoDetails,
+  getPlaylist,
+  platforms,
+  Platform,
+} from "../services/youtube";
 import { formatTimeRange } from "../utils/time";
 import { youtubePlaylistRegex } from "../constant/regex";
 import { playAudio } from "./playAudio";
+import { misabotLogo } from "../constant/config";
 
 export default {
   name: "play",
@@ -31,7 +37,8 @@ export default {
               .setURL(paths[0])
               .setTitle(result.title)
               .setAuthor(
-                `➕ Add playlist to order by ${message.member.displayName}`
+                `➕ Add playlist to order by ${message.member.displayName}`,
+                platforms[Platform.YOUTUBE.toString()]
               )
               .setThumbnail(result.thumbnail)
               .addFields(
@@ -41,7 +48,8 @@ export default {
                   value: resources.length,
                   inline: true,
                 }
-              );
+              )
+              .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
 
             message.channel.send(messageEmbed).then(() => {
               if (!message.guild.voice) {
@@ -88,7 +96,10 @@ export default {
               .setURL(result.url)
               .setColor("#0099ff")
               .setTitle(result.title)
-              .setAuthor(`Add to order by ${message.member.displayName}`)
+              .setAuthor(
+                `Add to order by ${message.member.displayName}`,
+                platforms[Platform.YOUTUBE.toString()]
+              )
               .setThumbnail(result.thumbnail)
               .addFields(
                 { name: "Channel", value: result.author, inline: true },
@@ -98,7 +109,9 @@ export default {
                   inline: true,
                 }
               )
-              .addField("Position in order", server.queue.length + 1, true);
+              .addField("Position in order", server.queue.length + 1, true)
+              .setImage(platforms[Platform.YOUTUBE.toString()])
+              .setFooter(`Misabot © ${new Date().getFullYear()}`, misabotLogo);
 
             message.channel.send(messageEmbed).then(() => {
               if (!message.guild.voice) {
