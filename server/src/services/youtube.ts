@@ -3,7 +3,7 @@ import ytdl from "ytdl-core";
 import ytpl from "ytpl";
 
 import { youtubeVideoRegex } from "../constant/regex";
-import { youtubeLogo, soundCloudLogo } from "../constant/config";
+import { Platform, Resource } from "./types";
 
 const searchVideo = async (keyword: string) => {
   const result = await ytsr(keyword, { pages: 1 });
@@ -14,31 +14,6 @@ const searchVideo = async (keyword: string) => {
   };
   return item.id;
 };
-
-export enum Platform {
-  YOUTUBE,
-  SOUNDCLOUD,
-}
-
-export const platforms = {
-  [Platform.YOUTUBE.toString()]: {
-    uri: youtubeLogo,
-    name: "Youtube",
-  },
-  [Platform.SOUNDCLOUD.toString()]: {
-    uri: soundCloudLogo,
-    name: "Youtube",
-  },
-};
-
-export interface Resource {
-  title: string;
-  length: number;
-  author: string;
-  thumbnail: string;
-  url: string;
-  platform: Platform;
-}
 
 export const getVideoDetails = async (content: string): Promise<Resource> => {
   const parsedContent = content.match(youtubeVideoRegex);

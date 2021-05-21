@@ -1,16 +1,12 @@
 import { Message, MessageEmbed } from "discord.js";
 
 import { servers } from "../data/server";
-import {
-  getVideoDetails,
-  getPlaylist,
-  platforms,
-  Platform,
-} from "../services/youtube";
+import { getVideoDetails, getPlaylist } from "../services/youtube";
 import { formatTimeRange } from "../utils/time";
 import { youtubePlaylistRegex } from "../constant/regex";
 import { playAudio } from "./playAudio";
-import { misabotLogo } from "../constant/config";
+import { misabotLogo, platforms } from "../constant/config";
+import { Platform } from "../services/types";
 
 export default {
   name: "play",

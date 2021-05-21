@@ -2,7 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { formatTimeRange } from "../utils/time";
 
 import { servers } from "../data/server";
-import { platforms } from "../services/youtube";
+import { platforms } from "../constant/config";
 
 export default {
   name: "queue",

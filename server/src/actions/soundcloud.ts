@@ -5,8 +5,8 @@ import { getTrackDetails, getPlaylist } from "../services/soundcloud";
 import { formatTimeRange } from "../utils/time";
 import { soundcloudPlaylistRegex } from "../constant/regex";
 import { playAudio } from "./playAudio";
-import { platforms, Platform } from "../services/youtube";
-import { misabotLogo } from "../constant/config";
+import { Platform } from "../services/types";
+import { misabotLogo, platforms } from "../constant/config";
 
 export default {
   name: "soundcloud",

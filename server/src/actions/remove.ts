@@ -2,8 +2,7 @@ import { Message, MessageEmbed } from "discord.js";
 
 import { formatTimeRange } from "../utils/time";
 import { servers } from "../data/server";
-import { misabotLogo } from "../constant/config";
-import { platforms } from "../services/youtube";
+import { misabotLogo, platforms } from "../constant/config";
 
 export default {
   name: "remove",

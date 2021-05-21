@@ -2,7 +2,7 @@ import { Message, VoiceConnection } from "discord.js";
 import ytdl from "ytdl-core";
 import scdl from "soundcloud-downloader";
 
-import { Platform } from "../services/youtube";
+import { Platform } from "../services/types";
 import { servers, Song } from "../data/server";
 
 export const playAudio = (

@@ -1,6 +1,6 @@
 import { StreamDispatcher } from "discord.js";
 
-import { Resource } from "../services/youtube";
+import { Resource } from "../services/types";
 
 export interface Song {
   requester: string;

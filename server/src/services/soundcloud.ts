@@ -2,7 +2,7 @@ import scdl from "soundcloud-downloader";
 
 import { soundcloudTrackRegex } from "../constant/regex";
 import { defaultSCArtWork } from "../constant/config";
-import { Platform, Resource } from "./youtube";
+import { Platform, Resource } from "./types";
 
 const searchVideo = async (keyword: string): Promise<string> => {
   const res = await scdl.search({

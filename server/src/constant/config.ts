@@ -1,3 +1,5 @@
+import { Platform } from "../services/types";
+
 export const prefix = "!";
 
 export const defaultSCArtWork =
@@ -11,3 +13,14 @@ export const youtubeLogo =
 
 export const misabotLogo =
   "https://res.cloudinary.com/dumfvnj9f/image/upload/v1621607524/misabot-discord/misabot-footer_nqcfen.png";
+
+export const platforms = {
+  [Platform.YOUTUBE.toString()]: {
+    uri: youtubeLogo,
+    name: "Youtube",
+  },
+  [Platform.SOUNDCLOUD.toString()]: {
+    uri: soundCloudLogo,
+    name: "Youtube",
+  },
+};
