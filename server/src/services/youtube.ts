@@ -1,9 +1,9 @@
-import ytsr, { Playlist } from "ytsr";
+import ytsr from "ytsr";
 import ytdl from "ytdl-core";
 import ytpl from "ytpl";
 
 import { youtubeVideoRegex } from "../constant/regex";
-import { Platform, Resource } from "./types";
+import { Platform, Resource, Playlist } from "./types";
 
 const searchVideo = async (keyword: string) => {
   const result = await ytsr(keyword, { pages: 1 });
