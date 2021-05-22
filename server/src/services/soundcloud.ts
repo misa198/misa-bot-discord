@@ -1,5 +1,4 @@
-import scdl from "soundcloud-downloader";
-
+import { scdl } from "../bot";
 import { soundcloudTrackRegex } from "../constant/regex";
 import { defaultSCArtWork } from "../constant/config";
 import { Platform, Playlist, Resource } from "./types";
@@ -9,7 +8,7 @@ const searchTrack = async (keyword: string): Promise<string> => {
     query: keyword,
     limit: 10,
     offset: 0,
-    resourceType: "tracks",
+    filter: "tracks",
   });
 
   if (res.collection.length > 0) {
@@ -28,7 +27,7 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
     } else {
       url = paths[0];
     }
-    const track = await scdl.getInfo(url);
+    const track = await scdl.info.getTrackByPermalink(url);
 
     if (track)
       return {
@@ -47,7 +46,7 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
 
 export const getPlaylist = async (url: string): Promise<Playlist> => {
   try {
-    const playlist = await scdl.getSetInfo(url);
+    const playlist = await scdl.info.getPlaylistByPermalink(url);
 
     const resources: Resource[] = [];
     playlist.tracks.forEach((track) => {
