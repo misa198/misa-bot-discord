@@ -11,5 +11,5 @@ export const soundcloudTrackRegex = new RegExp(
 );
 
 export const soundcloudPlaylistRegex = new RegExp(
-  /^https?:\/\/(soundcloud\.com|snd\.sc)\/(.*)\/sets\/(.*)$/
+  /^https?:\/\/(soundcloud\.com|snd\.sc)\/([^?])*\/sets\/(.*)$/
 );
