@@ -8,6 +8,7 @@
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "ffmpeg-static": "^4.3.0",
+    "heroku-awake": "^1.0.10",
     "opusscript": "^0.0.8",
     "scdl-core": "^1.0.3",
     "ytdl-core": "^4.8.0",
