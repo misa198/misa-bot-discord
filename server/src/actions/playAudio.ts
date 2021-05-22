@@ -1,6 +1,7 @@
 import { Message, VoiceConnection } from "discord.js";
 import ytdl from "ytdl-core";
-import scdl from "soundcloud-downloader";
+
+import { scdl } from "../bot";
 
 import { Platform } from "../services/types";
 import { servers, Song } from "../data/server";
