@@ -48,17 +48,21 @@ export const playAudio = (
       }
     });
   } else {
-    scdl.download(song.resource.url).then((stream) => {
-      server.dispatcher = connection.play(stream);
-      server.dispatcher.on("finish", () => {
-        if (server.queue[0] || server.playing?.loop)
-          playAudio(connection, message);
-        else {
-          server.playing = null;
-          server.queue = [];
-          connection.disconnect();
-        }
+    scdl
+      .download(song.resource.url, {
+        highWaterMark: 1024 * 1024 * 3,
+      })
+      .then((stream) => {
+        server.dispatcher = connection.play(stream);
+        server.dispatcher.on("finish", () => {
+          if (server.queue[0] || server.playing?.loop)
+            playAudio(connection, message);
+          else {
+            server.playing = null;
+            server.queue = [];
+            connection.disconnect();
+          }
+        });
       });
-    });
   }
 };
