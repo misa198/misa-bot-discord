@@ -17,7 +17,10 @@ export default {
           .setURL(song.resource.url)
           .setColor("#0099ff")
           .setTitle(song.resource.title)
-          .setAuthor(`Playing 🎵`, platforms[song.resource.platform.toString()].uri)
+          .setAuthor(
+            `Playing 🎵`,
+            platforms[song.resource.platform.toString()].uri
+          )
           .setThumbnail(song.resource.thumbnail)
           .addFields(
             { name: "Channel", value: song.resource.author, inline: true },
@@ -33,7 +36,7 @@ export default {
             },
             {
               name: "Loop",
-              value: server.playing.loop ? "✅ " : "❌",
+              value: server.playing.loop ? "Yes" : "No",
               inline: true,
             }
           )
