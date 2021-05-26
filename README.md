@@ -24,8 +24,8 @@ Meet Misabot [here](https://misabotapp.herokuapp.com).
 | 9  | !queue           | View songs in queue                     | !queue                                                    |
 | 10 | !select          | Select song by position in queue        | !select {position}                                        |
 | 11 | !remove          | Remove song by position in queue        | !remove or !rm {position}                                 |
-## Guild
-Guild to build Misabot [here](https://viblo.asia/p/tao-mot-discord-bot-phat-nhac-don-gian-bang-nodejs-typescript-va-deploy-len-heroku-Qbq5QE935D8).
+## Guide
+Guide to build Misabot [here](https://viblo.asia/p/tao-mot-discord-bot-phat-nhac-don-gian-bang-nodejs-typescript-va-deploy-len-heroku-Qbq5QE935D8).
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
