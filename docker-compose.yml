@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  main:
+    container_name: misabot-discord
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      TOKEN: <token>
+      PORT: 3000
+    expose:
+      - 3000
+    networks:
+      - common
+
+networks:
+  common:
