@@ -27,7 +27,7 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
     } else {
       url = paths[0];
     }
-    const track = await scdl.info.getTrackByPermalink(url);
+    const track = await scdl.tracks.getTrack(url);
 
     if (track)
       return {
@@ -46,7 +46,7 @@ export const getTrackDetails = async (content: string): Promise<Resource> => {
 
 export const getPlaylist = async (url: string): Promise<Playlist> => {
   try {
-    const playlist = await scdl.info.getPlaylistByPermalink(url);
+    const playlist = await scdl.playlists.getPlaylist(url);
 
     const resources: Resource[] = [];
     playlist.tracks.forEach((track) => {
