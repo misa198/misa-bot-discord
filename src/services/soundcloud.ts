@@ -7,7 +7,7 @@ import { SoundCloud } from 'scdl-core';
 export const scdl = new SoundCloud();
 
 export class SoundCloudService {
-  public static async getTrackDetails(content: string): Promise<Song | null> {
+  public static async getTrackDetails(content: string): Promise<Song> {
     let url = '';
     const paths = content.match(soundCloudTrackRegex);
     if (!paths) {
@@ -15,7 +15,7 @@ export class SoundCloudService {
     } else {
       url = paths[0];
     }
-    if (!url) return null;
+    if (!url) throw new Error();
     const track = await scdl.tracks.getTrack(url);
     if (track)
       return {
@@ -28,12 +28,12 @@ export class SoundCloudService {
         url,
         platform: Platform.SOUND_CLOUD,
       };
-    return null;
+    throw new Error();
   }
 
-  public static async getPlaylist(url: string): Promise<Playlist | null> {
+  public static async getPlaylist(url: string): Promise<Playlist> {
     const playlist = await scdl.playlists.getPlaylist(url);
-    if (!playlist) return null;
+    if (!playlist) if (!url) throw new Error();
     const songs: Song[] = [];
     playlist.tracks.forEach((track) => {
       songs.push({
