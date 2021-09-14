@@ -1,4 +1,5 @@
 export default {
+  error: '❌ Error!',
   cantFindAnyThing: "❌ Can't find anything!",
   joinVoiceChannel: '🔊 Join a voice channel and try again!',
   failToJoinVoiceChannel: '❌ Failed to join voice channel!',
@@ -12,4 +13,6 @@ export default {
   notPlaying: '🔇 Not playing!',
   alreadyPaused: '⏸ Already paused!',
   paused: '⏸ Paused!',
+  resumed: '▶ Resumed!',
+  alreadyPlaying: '▶ Already playing!',
 };

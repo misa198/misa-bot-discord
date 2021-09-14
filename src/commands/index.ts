@@ -1,3 +1,4 @@
+import messages from '@/constants/messages';
 import { Client } from 'discord.js';
 import { deploy } from './collections/deploy';
 import { pause } from './collections/pause';
@@ -10,19 +11,23 @@ export const run = (client: Client): void => {
 
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand() || !interaction.guildId) return;
-    switch (interaction.commandName) {
-      case play.name:
-        play.execute(interaction);
-        break;
-      case skip.name:
-        skip.execute(interaction);
-        break;
-      case soundcloud.name:
-        soundcloud.execute(interaction);
-        break;
-      case pause.name:
-        pause.execute(interaction);
-        break;
+    try {
+      switch (interaction.commandName) {
+        case play.name:
+          play.execute(interaction);
+          break;
+        case skip.name:
+          skip.execute(interaction);
+          break;
+        case soundcloud.name:
+          soundcloud.execute(interaction);
+          break;
+        case pause.name:
+          pause.execute(interaction);
+          break;
+      }
+    } catch (e) {
+      interaction.reply(messages.error);
     }
   });
 };
