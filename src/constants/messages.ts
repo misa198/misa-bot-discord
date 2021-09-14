@@ -8,5 +8,8 @@ export default {
   length: 'Length',
   type: 'Type',
   noSongsInQueue: '👀 No songs in queue!',
-  skippedSong: '⏩ Skipped song',
+  skippedSong: '⏩ Skipped song!',
+  notPlaying: '🔇 Not playing!',
+  alreadyPaused: '⏸ Already paused!',
+  paused: '⏸ Paused!',
 };

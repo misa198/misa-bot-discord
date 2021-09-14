@@ -1,5 +1,6 @@
 import messages from '@/constants/messages';
 import { servers } from '@/servers';
+import { AudioPlayerStatus } from '@discordjs/voice';
 import { CommandInteraction } from 'discord.js';
 
 export const pause = {
@@ -11,12 +12,15 @@ export const pause = {
       await interaction.followUp(messages.joinVoiceChannel);
       return;
     }
-    if (server.queue.length === 0) {
-      await interaction.followUp(messages.noSongsInQueue);
+    if (!server.playing) {
+      await interaction.followUp(messages.notPlaying);
+      return;
     }
-    await server.play();
-    if (server.playing) {
-      await interaction.followUp(messages.skippedSong);
+    if (server.audioPlayer.state.status === AudioPlayerStatus.Paused) {
+      await interaction.followUp(messages.alreadyPaused);
+      return;
     }
+    server.audioPlayer.pause();
+    await interaction.followUp(messages.paused);
   },
 };
