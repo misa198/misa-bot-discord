@@ -1,8 +1,8 @@
 import { Client } from 'discord.js';
-import { deploy } from './utils/deploy';
-import { play } from './utils/play';
-import { skip } from './utils/skip';
-import { soundcloud } from './utils/soundcloud';
+import { deploy } from './collections/deploy';
+import { play } from './collections/play';
+import { skip } from './collections/skip';
+import { soundcloud } from './collections/soundcloud';
 
 export const run = (client: Client): void => {
   deploy(client);

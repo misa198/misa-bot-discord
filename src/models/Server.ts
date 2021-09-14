@@ -126,6 +126,14 @@ export class Server {
     servers.delete(this.guildId);
   }
 
+  public pause(): void {
+    this.audioPlayer.pause();
+  }
+
+  public resume(): void {
+    this.audioPlayer.unpause();
+  }
+
   public async play(): Promise<void> {
     try {
       if (this.queue.length > 0) {
