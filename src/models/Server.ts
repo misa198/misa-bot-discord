@@ -12,7 +12,7 @@ import {
 } from '@discordjs/voice';
 import ytdl from 'ytdl-core';
 
-interface QueueItem {
+export interface QueueItem {
   song: Song;
   requester: string;
 }
@@ -86,31 +86,34 @@ export class Server {
     });
 
     // Configure audio player
-    this.audioPlayer.on('stateChange', (oldState, newState) => {
+    this.audioPlayer.on('stateChange', async (oldState, newState) => {
       if (
         newState.status === AudioPlayerStatus.Idle &&
         oldState.status !== AudioPlayerStatus.Idle
       ) {
-        this.play();
+        await this.play();
       } else if (newState.status === AudioPlayerStatus.Playing) {
-        this.play();
+        await this.play();
       }
     });
 
     voiceConnection.subscribe(this.audioPlayer);
   }
 
-  private stop(): void {
+  public addSongs(queueItems: QueueItem[]): void {
+    this.queue = this.queue.concat(queueItems);
+  }
+
+  public stop(): void {
     this.playing = undefined;
     this.queue = [];
     this.audioPlayer.stop();
   }
 
-  private async play() {
+  public async play(): Promise<void> {
     try {
       if (this.queue.length > 0) {
         this.playing = this.queue.shift() as QueueItem;
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let stream: any;
         const highWaterMark = 1024 * 1024 * 10;
         if (this.playing?.song.platform === Platform.YOUTUBE) {

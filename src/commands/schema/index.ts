@@ -1,24 +1,26 @@
 export const schema = [
   {
     name: 'play',
-    description: 'Plays a song on Youtube',
+    description: 'Plays a song or playlist on Youtube',
     options: [
       {
-        name: 'song',
+        name: 'input',
         type: 'STRING' as const,
-        description: 'The url or keyword to search videos on Youtube',
+        description:
+          'The url or keyword to search videos or playlist on Youtube',
         required: true,
       },
     ],
   },
   {
     name: 'soundcloud',
-    description: 'Plays a song on SoundCloud',
+    description: 'Plays a song, album or playlist on SoundCloud',
     options: [
       {
-        name: 'song',
+        name: 'input',
         type: 'STRING' as const,
-        description: 'The url or keyword to search tracks on SoundCloud',
+        description:
+          'The url or keyword to search videos or playlist on SoundCloud',
         required: true,
       },
     ],

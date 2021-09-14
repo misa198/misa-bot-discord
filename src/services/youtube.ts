@@ -1,4 +1,4 @@
-import { youtubeVideoRegex } from '@/constants/regex';
+import { youtubePlaylistRegex, youtubeVideoRegex } from '@/constants/regex';
 import { Playlist } from '@/types/Playlist';
 import { Platform, Song } from '@/types/Song';
 import ytdl from 'ytdl-core';
@@ -60,6 +60,12 @@ export class YoutubeService {
     if (filteredRes.length === 0) throw new Error();
     const item = filteredRes[0] as Video;
     return item.id;
+  }
+
+  public static isPlaylist(url: string): string | null {
+    const paths = url.match(youtubePlaylistRegex);
+    if (paths) return paths[0];
+    return null;
   }
 
   private static generateVideoUrl(id: string) {
