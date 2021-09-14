@@ -1,12 +1,16 @@
-import { Song } from '@/types/Song';
+import { scdl } from '@/services/soundcloud';
+import { Platform, Song } from '@/types/Song';
 import {
   AudioPlayer,
+  AudioPlayerStatus,
   createAudioPlayer,
+  createAudioResource,
   entersState,
   VoiceConnection,
   VoiceConnectionDisconnectReason,
   VoiceConnectionStatus,
 } from '@discordjs/voice';
+import ytdl from 'ytdl-core';
 
 interface QueueItem {
   song: Song;
@@ -14,7 +18,7 @@ interface QueueItem {
 }
 
 export class Server {
-  public playing?: Song;
+  public playing?: QueueItem;
   public queue: QueueItem[];
   public readonly voiceConnection: VoiceConnection;
   public readonly audioPlayer: AudioPlayer;
@@ -80,9 +84,47 @@ export class Server {
         }
       }
     });
+
+    // Configure audio player
+    this.audioPlayer.on('stateChange', (oldState, newState) => {
+      if (
+        newState.status === AudioPlayerStatus.Idle &&
+        oldState.status !== AudioPlayerStatus.Idle
+      ) {
+        this.play();
+      } else if (newState.status === AudioPlayerStatus.Playing) {
+        this.play();
+      }
+    });
+
+    voiceConnection.subscribe(this.audioPlayer);
   }
 
-  public stop(): void {
+  private stop(): void {
+    this.playing = undefined;
+    this.queue = [];
     this.audioPlayer.stop();
+  }
+
+  private async play() {
+    try {
+      if (this.queue.length > 0) {
+        this.playing = this.queue.shift() as QueueItem;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let stream: any;
+        const highWaterMark = 1024 * 1024 * 10;
+        if (this.playing?.song.platform === Platform.YOUTUBE) {
+          stream = ytdl(this.playing.song.url, { highWaterMark });
+        } else {
+          stream = await scdl.download(this.playing.song.url, {
+            highWaterMark,
+          });
+        }
+        const audioResource = createAudioResource(stream);
+        this.audioPlayer.play(audioResource);
+      }
+    } catch (e) {
+      this.play();
+    }
   }
 }
