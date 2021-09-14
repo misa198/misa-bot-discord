@@ -1,17 +1,20 @@
-import 'module-alias/register';
 import { config } from 'dotenv';
 config();
 
+import { TOKEN } from '@/constants/config';
 import { Client, Intents } from 'discord.js';
 import log from 'fancy-log';
-import { TOKEN } from '@/constants/config';
+import run from '@/commands';
 
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
 client.on('ready', () => {
-  log.info(`> Bot is on ready as ${client.user.tag}`);
+  log.info(`> Bot is on ready as ${client?.user?.tag}`);
 });
 
-client.login(TOKEN);
+(async () => {
+  await client.login(TOKEN);
+  run(client);
+})();
