@@ -9,12 +9,12 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "*": [
-        "node_modules/*"
+      "@": [
+        "src/*"
       ]
     },
   },
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ]
 }
