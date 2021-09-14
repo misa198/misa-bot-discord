@@ -1,5 +1,8 @@
 import { DEFAULT_SOUND_CLOUD_ARTWORK } from '@/constants/config';
-import { soundCloudTrackRegex } from '@/constants/regex';
+import {
+  soundCloudPlaylistRegex,
+  soundCloudTrackRegex,
+} from '@/constants/regex';
 import { Playlist } from '@/types/Playlist';
 import { Platform, Song } from '@/types/Song';
 import { SoundCloud } from 'scdl-core';
@@ -56,6 +59,12 @@ export class SoundCloudService {
       author: `${playlist.user.first_name} ${playlist.user.last_name}`,
       songs,
     };
+  }
+
+  public static isPlaylist(url: string): string | null {
+    const paths = url.match(soundCloudPlaylistRegex);
+    if (paths) return paths[0];
+    return null;
   }
 
   private static async searchTrack(keyword: string): Promise<string> {

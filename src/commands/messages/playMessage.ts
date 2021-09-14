@@ -44,7 +44,7 @@ export const createPlayMessage = (payload: {
     .setTitle(payload.title)
     .setURL(payload.url)
     .setAuthor(
-      `${payload.type} ${messages.addedToQueue} ${payload.requester}`,
+      `${messages.addedToQueue} ${payload.requester}`,
       PLATFORM[payload.platform].uri,
     )
     .setThumbnail(payload.thumbnail)
