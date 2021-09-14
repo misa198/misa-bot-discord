@@ -12,15 +12,11 @@ export const pause = {
       await interaction.followUp(messages.joinVoiceChannel);
       return;
     }
-    if (!server.playing) {
-      await interaction.followUp(messages.notPlaying);
+    if (server.audioPlayer.state.status === AudioPlayerStatus.Playing) {
+      server.audioPlayer.pause();
+      await interaction.followUp(messages.paused);
       return;
     }
-    if (server.audioPlayer.state.status === AudioPlayerStatus.Paused) {
-      await interaction.followUp(messages.alreadyPaused);
-      return;
-    }
-    server.audioPlayer.pause();
-    await interaction.followUp(messages.paused);
+    await interaction.followUp(messages.notPlaying);
   },
 };
