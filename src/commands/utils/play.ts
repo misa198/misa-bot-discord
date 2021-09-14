@@ -2,12 +2,14 @@ import messages from '@/constants/messages';
 import { QueueItem, Server } from '@/models/Server';
 import { servers } from '@/servers';
 import { YoutubeService } from '@/services/youtube';
+import { Platform } from '@/types/Song';
 import {
   entersState,
   joinVoiceChannel,
   VoiceConnectionStatus,
 } from '@discordjs/voice';
 import { CommandInteraction, GuildMember } from 'discord.js';
+import { createPlayMessage } from '../messages/playMessage';
 
 export const play = {
   name: 'play',
@@ -70,7 +72,19 @@ export const play = {
           requester: interaction.member?.user.username as string,
         };
         server.addSongs([queueItem]);
-        interaction.followUp(song.title);
+        interaction.followUp({
+          embeds: [
+            createPlayMessage({
+              title: song.title,
+              url: song.url,
+              author: song.author,
+              thumbnail: song.thumbnail,
+              type: 'Song',
+              length: song.length,
+              platform: Platform.YOUTUBE,
+            }),
+          ],
+        });
       }
       await server.play();
     } catch (error) {
