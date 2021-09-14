@@ -3,6 +3,7 @@ import { Client } from 'discord.js';
 import { deploy } from './collections/deploy';
 import { pause } from './collections/pause';
 import { play } from './collections/play';
+import { resume } from './collections/resume';
 import { skip } from './collections/skip';
 import { soundcloud } from './collections/soundcloud';
 
@@ -24,6 +25,9 @@ export const run = (client: Client): void => {
           break;
         case pause.name:
           pause.execute(interaction);
+          break;
+        case resume.name:
+          resume.execute(interaction);
           break;
       }
     } catch (e) {
