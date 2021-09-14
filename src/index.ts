@@ -5,6 +5,7 @@ import { TOKEN } from '@/constants/config';
 import { Client, Intents } from 'discord.js';
 import log from 'fancy-log';
 import run from '@/commands';
+import { scdl } from '@/services/soundcloud';
 
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -16,5 +17,6 @@ client.on('ready', () => {
 
 (async () => {
   await client.login(TOKEN);
+  await scdl.connect();
   run(client);
 })();
