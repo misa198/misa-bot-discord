@@ -7,6 +7,7 @@ import {
 import messages from '@/constants/messages';
 import { Platform } from '@/types/Song';
 import { EmbedFieldData, MessageEmbed } from 'discord.js';
+import moment from 'moment';
 
 export const createPlayMessage = (payload: {
   title: string;
@@ -16,6 +17,7 @@ export const createPlayMessage = (payload: {
   type: 'Song' | 'Playlist';
   length: number;
   platform: Platform;
+  requester: string;
 }): MessageEmbed => {
   const author: EmbedFieldData = {
     name: messages.author,
@@ -24,7 +26,17 @@ export const createPlayMessage = (payload: {
   };
   const length: EmbedFieldData = {
     name: messages.length,
-    value: payload.length.toString(),
+    value:
+      payload.type === 'Playlist'
+        ? payload.length.toString()
+        : moment
+            .utc(payload.length * 1000)
+            .format(payload.length > 3600 ? 'HH:mm:ss' : 'mm:ss'),
+    inline: true,
+  };
+  const type: EmbedFieldData = {
+    name: messages.type,
+    value: payload.type,
     inline: true,
   };
   return new MessageEmbed()
@@ -32,10 +44,10 @@ export const createPlayMessage = (payload: {
     .setTitle(payload.title)
     .setURL(payload.url)
     .setAuthor(
-      `${payload.type} ${messages.addedToQueue} ${payload.author}`,
+      `${payload.type} ${messages.addedToQueue} ${payload.requester}`,
       PLATFORM[payload.platform].uri,
     )
     .setThumbnail(payload.thumbnail)
-    .addFields(author, length)
+    .addFields(author, length, type)
     .setFooter(BOT_NAME, BOT_LOGO);
 };

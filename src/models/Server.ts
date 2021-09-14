@@ -28,6 +28,7 @@ export class Server {
     this.voiceConnection = voiceConnection;
     this.audioPlayer = createAudioPlayer();
     this.queue = [];
+    this.playing = undefined;
 
     this.voiceConnection.on('stateChange', async (_, newState) => {
       if (newState.status === VoiceConnectionStatus.Disconnected) {
@@ -92,16 +93,17 @@ export class Server {
         oldState.status !== AudioPlayerStatus.Idle
       ) {
         await this.play();
-      } else if (newState.status === AudioPlayerStatus.Playing) {
-        await this.play();
       }
     });
 
     voiceConnection.subscribe(this.audioPlayer);
   }
 
-  public addSongs(queueItems: QueueItem[]): void {
+  public async addSongs(queueItems: QueueItem[]): Promise<void> {
     this.queue = this.queue.concat(queueItems);
+    if (!this.playing) {
+      await this.play();
+    }
   }
 
   public stop(): void {
@@ -125,6 +127,8 @@ export class Server {
         }
         const audioResource = createAudioResource(stream);
         this.audioPlayer.play(audioResource);
+      } else {
+        this.playing = undefined;
       }
     } catch (e) {
       this.play();

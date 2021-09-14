@@ -29,7 +29,6 @@ export const play = {
             adapterCreator: channel.guild.voiceAdapterCreator,
           }),
         );
-        server.voiceConnection.on('error', console.warn);
         servers.set(interaction.guildId as string, server);
       }
     }
@@ -47,7 +46,6 @@ export const play = {
         20e3,
       );
     } catch (error) {
-      console.warn(error);
       await interaction.followUp(messages.failToJoinVoiceChannel);
       return;
     }
@@ -64,14 +62,14 @@ export const play = {
           };
           return queueItem;
         });
-        server.addSongs(songs);
+        await server.addSongs(songs);
       } else {
         const song = await YoutubeService.getVideoDetails(input);
         const queueItem: QueueItem = {
           song,
           requester: interaction.member?.user.username as string,
         };
-        server.addSongs([queueItem]);
+        await server.addSongs([queueItem]);
         interaction.followUp({
           embeds: [
             createPlayMessage({
@@ -82,11 +80,11 @@ export const play = {
               type: 'Song',
               length: song.length,
               platform: Platform.YOUTUBE,
+              requester: interaction.member?.user.username as string,
             }),
           ],
         });
       }
-      await server.play();
     } catch (error) {
       await interaction.followUp(messages.failToPlay);
     }
