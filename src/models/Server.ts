@@ -143,6 +143,7 @@ export class Server {
         this.audioPlayer.play(audioResource);
       } else {
         this.playing = undefined;
+        this.audioPlayer.stop();
       }
     } catch (e) {
       this.play();

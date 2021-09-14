@@ -7,4 +7,6 @@ export default {
   author: 'Author',
   length: 'Length',
   type: 'Type',
+  noSongsInQueue: '👀 No songs in queue!',
+  skippedSong: '⏩ Skipped song',
 };
