@@ -64,6 +64,20 @@ export const soundcloud = {
           return queueItem;
         });
         await server.addSongs(songs);
+        interaction.followUp({
+          embeds: [
+            createPlayMessage({
+              title: playlist.title,
+              url: playlistUrl,
+              author: playlist.author,
+              thumbnail: playlist.thumbnail,
+              type: 'Playlist',
+              length: playlist.songs.length,
+              platform: Platform.SOUND_CLOUD,
+              requester: interaction.member?.user.username as string,
+            }),
+          ],
+        });
       } else {
         const song = await SoundCloudService.getTrackDetails(input);
         const queueItem: QueueItem = {

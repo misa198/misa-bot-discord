@@ -64,6 +64,20 @@ export const play = {
           return queueItem;
         });
         await server.addSongs(songs);
+        interaction.followUp({
+          embeds: [
+            createPlayMessage({
+              title: playlist.title,
+              url: input,
+              author: playlist.author,
+              thumbnail: playlist.thumbnail,
+              type: 'Playlist',
+              length: playlist.songs.length,
+              platform: Platform.YOUTUBE,
+              requester: interaction.member?.user.username as string,
+            }),
+          ],
+        });
       } else {
         const song = await YoutubeService.getVideoDetails(input);
         const queueItem: QueueItem = {
