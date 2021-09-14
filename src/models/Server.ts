@@ -1,3 +1,4 @@
+import { servers } from '@/servers';
 import { scdl } from '@/services/soundcloud';
 import { Platform, Song } from '@/types/Song';
 import {
@@ -18,20 +19,24 @@ export interface QueueItem {
 }
 
 export class Server {
+  public guildId: string;
   public playing?: QueueItem;
   public queue: QueueItem[];
   public readonly voiceConnection: VoiceConnection;
   public readonly audioPlayer: AudioPlayer;
   private isReady = false;
 
-  constructor(voiceConnection: VoiceConnection) {
+  constructor(voiceConnection: VoiceConnection, guildId: string) {
     this.voiceConnection = voiceConnection;
     this.audioPlayer = createAudioPlayer();
     this.queue = [];
     this.playing = undefined;
+    this.guildId = guildId;
 
     this.voiceConnection.on('stateChange', async (_, newState) => {
+      console.log(`Voice connection state changed to ${newState.status}`);
       if (newState.status === VoiceConnectionStatus.Disconnected) {
+        console.log(`Reason ${newState.reason}`);
         /*
           If the WebSocket closed with a 4014 code, this means that we should not manually attempt to reconnect,
           but there is a chance the connection will recover itself if the reason of the disconnect was due to
@@ -51,12 +56,16 @@ export class Server {
             );
           } catch (e) {
             this.voiceConnection.destroy();
+            this.leave();
           }
         } else if (this.voiceConnection.rejoinAttempts < 5) {
           this.voiceConnection.rejoin();
+        } else {
+          this.voiceConnection.destroy();
+          this.leave();
         }
       } else if (newState.status === VoiceConnectionStatus.Destroyed) {
-        this.stop();
+        this.leave();
       } else if (
         !this.isReady &&
         (newState.status === VoiceConnectionStatus.Connecting ||
@@ -110,6 +119,11 @@ export class Server {
     this.playing = undefined;
     this.queue = [];
     this.audioPlayer.stop();
+  }
+
+  public leave(): void {
+    this.stop();
+    servers.delete(this.guildId);
   }
 
   public async play(): Promise<void> {

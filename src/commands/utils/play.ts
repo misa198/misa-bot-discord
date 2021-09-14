@@ -28,6 +28,7 @@ export const play = {
             guildId: channel.guild.id,
             adapterCreator: channel.guild.voiceAdapterCreator,
           }),
+          interaction.guildId as string,
         );
         servers.set(interaction.guildId as string, server);
       }
