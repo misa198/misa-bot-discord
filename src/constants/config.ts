@@ -1,5 +1,8 @@
 import { Platform } from '@/types/Song';
 
+export const PORT = parseInt(process.env.PORT || '3000', 10);
+export const APP_URL = process.env.APP_URL || 'http://localhost:3000';
+
 export const TOKEN = process.env.TOKEN;
 export const PREFIX = '!';
 export const DEFAULT_SOUND_CLOUD_ARTWORK =
