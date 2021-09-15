@@ -1,6 +1,7 @@
 import messages from '@/constants/messages';
 import { Client } from 'discord.js';
 import { deploy } from './collections/deploy';
+import { jump } from './collections/jump';
 import { leave } from './collections/leave';
 import { nowPlaying } from './collections/nowplaying';
 import { pause } from './collections/pause';
@@ -40,6 +41,9 @@ export const run = (client: Client): void => {
           break;
         case queue.name:
           queue.execute(interaction);
+          break;
+        case jump.name:
+          jump.execute(interaction);
           break;
       }
     } catch (e) {

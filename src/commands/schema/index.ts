@@ -1,3 +1,5 @@
+import { Constants } from 'discord.js';
+
 export const schema = [
   {
     name: 'play',
@@ -5,7 +7,7 @@ export const schema = [
     options: [
       {
         name: 'input',
-        type: 'STRING' as const,
+        type: Constants.ApplicationCommandOptionTypes.STRING,
         description:
           'The url or keyword to search videos or playlist on Youtube',
         required: true,
@@ -18,7 +20,7 @@ export const schema = [
     options: [
       {
         name: 'input',
-        type: 'STRING' as const,
+        type: Constants.ApplicationCommandOptionTypes.STRING,
         description:
           'The url or keyword to search videos or playlist on SoundCloud',
         required: true,
@@ -55,7 +57,7 @@ export const schema = [
     options: [
       {
         name: 'position',
-        type: 'NUMBER' as const,
+        type: Constants.ApplicationCommandOptionTypes.NUMBER,
         description: 'The position of song in queue',
         required: true,
       },

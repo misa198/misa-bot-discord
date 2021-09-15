@@ -137,6 +137,16 @@ export class Server {
     this.audioPlayer.unpause();
   }
 
+  public async jump(position: number): Promise<QueueItem> {
+    const target = this.queue[position - 1];
+    this.queue = this.queue
+      .splice(0, position - 1)
+      .concat(this.queue.splice(position, this.queue.length - 1));
+    this.queue.unshift(target);
+    await this.play();
+    return target;
+  }
+
   public async play(): Promise<void> {
     try {
       if (this.queue.length > 0) {

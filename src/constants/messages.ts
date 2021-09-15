@@ -19,4 +19,6 @@ export default {
   leaved: '👋 Bye bye',
   nothing: '🤷‍♂️ Nothing',
   yourQueue: '🎶 Your queue',
+  invalidPosition: '❌ Invalid position!',
+  jumpedTo: '⏩ Jumped to',
 };
