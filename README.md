@@ -13,9 +13,15 @@ Misabot is a Discord bot that plays music in voice channel. The bot is built on 
 <br />
 For Discord.js v12, see [here](https://github.com/Misabot/misabot-discord/tree/v1)
 
+## Requirements
+
+- Node.js v16.6.0 or higher
+
 ## Using
 
-- Requirements: Node.js v16.6.0 or higher
+- Setup permissions
+  - Scopes: `bot`, `application.commands`
+  - Bot permissions: `Send Messages`, `Embed Links`, `Use Slash Commands`, `Connect`, `Speak`
 - ```bash
   git clone https://github.com/Misabot/misabot-discord.git && \
   cd misabot-discord
