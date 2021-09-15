@@ -1,6 +1,8 @@
 import messages from '@/constants/messages';
 import { Client } from 'discord.js';
 import { deploy } from './collections/deploy';
+import { leave } from './collections/leave';
+import { nowPlaying } from './collections/nowplaying';
 import { pause } from './collections/pause';
 import { play } from './collections/play';
 import { resume } from './collections/resume';
@@ -28,6 +30,12 @@ export const run = (client: Client): void => {
           break;
         case resume.name:
           resume.execute(interaction);
+          break;
+        case leave.name:
+          leave.execute(interaction);
+          break;
+        case nowPlaying.name:
+          nowPlaying.execute(interaction);
           break;
       }
     } catch (e) {

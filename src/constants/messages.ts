@@ -8,6 +8,7 @@ export default {
   author: 'Author',
   length: 'Length',
   type: 'Type',
+  platform: 'Platform',
   noSongsInQueue: '👀 No songs in queue!',
   skippedSong: '⏩ Skipped song!',
   notPlaying: '🔇 Not playing!',
@@ -15,4 +16,5 @@ export default {
   paused: '⏸ Paused!',
   resumed: '▶ Resumed!',
   alreadyPlaying: '▶ Already playing!',
+  leaved: '👋 Bye bye',
 };

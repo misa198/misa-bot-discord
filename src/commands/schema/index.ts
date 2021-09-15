@@ -46,6 +46,10 @@ export const schema = [
     description: 'Leave the voice channel',
   },
   {
+    name: 'nowplaying',
+    description: 'See the song that is currently playing',
+  },
+  {
     name: 'jump',
     description: 'Jump to song in queue by position',
     options: [

@@ -122,6 +122,9 @@ export class Server {
   }
 
   public leave(): void {
+    if (this.voiceConnection.state.status !== VoiceConnectionStatus.Destroyed) {
+      this.voiceConnection.destroy();
+    }
     this.stop();
     servers.delete(this.guildId);
   }
