@@ -1,3 +1,4 @@
+import { MESSAGE_EMBED_COLOR } from '@/constants/config';
 import messages from '@/constants/messages';
 import { QueueItem } from '@/models/Server';
 import { formatSeconds } from '@/utils/formatTime';
@@ -14,6 +15,7 @@ const generatePageMessage = (items: QueueItem[], start: number) => {
         messages.addedToQueue
       } ${item.requester}`,
     })),
+    color: MESSAGE_EMBED_COLOR,
   });
   return embedMessage;
 };

@@ -1,4 +1,5 @@
 import { schema } from '@/commands/schema';
+import { MESSAGE_EMBED_COLOR } from '@/constants/config';
 import messages from '@/constants/messages';
 import { BaseApplicationCommandOptionsData, MessageEmbed } from 'discord.js';
 
@@ -11,6 +12,7 @@ export const createHelpMessage = (): MessageEmbed => {
         value: `${item.description}`,
       }),
     ),
+    color: MESSAGE_EMBED_COLOR,
   });
   return embedMessage;
 };
