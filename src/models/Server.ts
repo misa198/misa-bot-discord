@@ -53,13 +53,11 @@ export class Server {
               5_000,
             );
           } catch (e) {
-            this.voiceConnection.destroy();
             this.leave();
           }
         } else if (this.voiceConnection.rejoinAttempts < 5) {
           this.voiceConnection.rejoin();
         } else {
-          this.voiceConnection.destroy();
           this.leave();
         }
       } else if (newState.status === VoiceConnectionStatus.Destroyed) {
