@@ -10,3 +10,4 @@ end_of_line = lf
 # editorconfig-tools is unable to ignore longs strings or urls
 max_line_length = off
 ij_typescript_spaces_within_brackets = true
+

@@ -1,23 +1,33 @@
-import { youtubePlaylistRegex, youtubeVideoRegex } from '@/constants/regex';
-import { Playlist } from '@/types/Playlist';
-import { Platform, Song } from '@/types/Song';
-import ytdl from 'ytdl-core';
-import ytpl from 'ytpl';
-import ytsr, { Video } from 'ytsr';
+import ytsr from "ytsr";
+import ytdl from "ytdl-core";
+import ytpl from "ytpl";
 
-export class YoutubeService {
-  public static async getVideoDetails(content: string): Promise<Song> {
-    const parsedContent = content.match(youtubeVideoRegex);
-    let id = '';
+import { youtubeVideoRegex } from "../constant/regex";
+import { Platform, Resource, Playlist } from "./types";
+
+const searchVideo = async (keyword: string) => {
+  const result = await ytsr(keyword, { pages: 1 });
+  const filteredRes = result.items.filter((e) => e.type === "video");
+  if (filteredRes.length === 0) throw "🔎 Can't find video!";
+  const item = filteredRes[0] as {
+    id: string;
+  };
+  return item.id;
+};
+
+export const getVideoDetails = async (content: string): Promise<Resource> => {
+  const parsedContent = content.match(youtubeVideoRegex);
+  let id = "";
+
+  try {
     if (!parsedContent) {
-      const result = await this.searchVideo(content);
-      if (!result) throw new Error();
-      id = result;
+      id = await searchVideo(content);
     } else {
       id = parsedContent[1];
     }
-    const videoUrl = this.generateVideoUrl(id);
-    const result = await ytdl.getInfo(videoUrl);
+    const url = `https://www.youtube.com/watch?v=${id}`;
+
+    const result = await ytdl.getInfo(url);
     return {
       title: result.videoDetails.title,
       length: parseInt(result.videoDetails.lengthSeconds, 10),
@@ -26,49 +36,38 @@ export class YoutubeService {
         result.videoDetails.thumbnails[
           result.videoDetails.thumbnails.length - 1
         ].url,
-      url: videoUrl,
+      url,
       platform: Platform.YOUTUBE,
     };
+  } catch (e) {
+    throw "❌ Can't find anything!";
   }
+};
 
-  public static async getPlaylist(url: string): Promise<Playlist> {
-    const id = url.split('?')[1].split('=')[1];
+export const getPlaylist = async (url: string): Promise<Playlist> => {
+  try {
+    const id = url.split("?")[1].split("=")[1];
     const playlist = await ytpl(id);
-    const songs: Song[] = [];
+
+    const resources: Resource[] = [];
     playlist.items.forEach((item) => {
-      songs.push({
+      resources.push({
         title: item.title,
-        thumbnail: item.bestThumbnail.url || '',
+        thumbnail: item.bestThumbnail.url,
         author: item.author.name,
         url: item.shortUrl,
-        length: item.durationSec || 0,
+        length: item.durationSec,
         platform: Platform.YOUTUBE,
       });
     });
 
     return {
       title: playlist.title,
-      thumbnail: playlist.bestThumbnail.url || '',
+      thumbnail: playlist.bestThumbnail.url,
       author: playlist.author.name,
-      songs,
+      resources,
     };
+  } catch (e) {
+    throw "❌ Can't find anything!";
   }
-
-  private static async searchVideo(keyword: string): Promise<string> {
-    const result = await ytsr(keyword, { pages: 1 });
-    const filteredRes = result.items.filter((item) => item.type === 'video');
-    if (filteredRes.length === 0) throw new Error();
-    const item = filteredRes[0] as Video;
-    return item.id;
-  }
-
-  public static isPlaylist(url: string): string | null {
-    const paths = url.match(youtubePlaylistRegex);
-    if (paths) return paths[0];
-    return null;
-  }
-
-  private static generateVideoUrl(id: string) {
-    return `https://www.youtube.com/watch?v=${id}`;
-  }
-}
+};

@@ -1,28 +1,25 @@
 # Misabot
 
-<p align="center">
-  <img src="./docs/logo.png" align="center" />
-  <p align="center" style="font-size: 20px; padding: 0 20%;">
-    Play Music in Discord
-  </p>
-</p>
+## Invite Misabot
+Meet Misabot [here](https://misabotapp.herokuapp.com).
 
 ## Docs
+| ID | Name             | Description                             | Usage                                                     |
+|----|------------------|-----------------------------------------|-----------------------------------------------------------|
+| 1  | !play            | Plays a song or playlist on Youtube with the given name or url | !play {link/query}                 |
+| 2  | !soundcloud, !sc | Plays a song or playlist on SoundCloud with the given name or url | !soundcloud or !sc {link/query} |
+| 3  | !pause           | Pause current song                      | !pause                                                    |
+| 4  | !resume          | Resume current song                     | !resume                                                   |
+| 5  | !skip, !fs       | Skip current song                       | !skip or !fs                                              |
+| 6  | !stop            | Stop and leave audio channel            | !stop                                                     |
+| 7  | !nowplaying, !np | Get current song info                   | !nowplaying or !np                                        |
+| 8  | !loop            | Loop current song                       | !loop                                                     |
+| 9  | !queue           | View songs in queue                     | !queue                                                    |
+| 10 | !select          | Select song by position in queue        | !select {position}                                        |
+| 11 | !remove          | Remove song by position in queue        | !remove or !rm {position}                                 |
 
-| ID  | Name       | Description                                                       | Usage                    |
-| --- | ---------- | ----------------------------------------------------------------- | ------------------------ |
-| 1   | play       | Plays a song or playlist on Youtube with the given name or url    | /play {link/query}       |
-| 2   | soundcloud | Plays a song or playlist on SoundCloud with the given name or url | /soundcloud {link/query} |
-| 3   | pause      | Pause current song                                                | /pause                   |
-| 4   | resume     | Resume current song                                               | /resume                  |
-| 5   | skip       | Skip current song                                                 | /skip                    |
-| 6   | leave      | Stop and leave audio channel                                      | /leave                   |
-| 7   | nowplaying | Get current song info                                             | /nowplaying              |
-| 8   | queue      | View songs in queue                                               | /queue                   |
-| 9   | jump       | Jump to song in queue by position                                 | /jump {position}         |
-| 10  | remove     | Remove song in queue by position                                  | /remove {position}       |
-| 11  | help       | See the help for this bot                                         | /help                    |
+## Guide
+Guide to build Misabot [here](https://viblo.asia/p/tao-mot-discord-bot-phat-nhac-don-gian-bang-nodejs-typescript-va-deploy-len-heroku-Qbq5QE935D8).
 
 ## License
-
 [MIT](https://choosealicense.com/licenses/mit/)

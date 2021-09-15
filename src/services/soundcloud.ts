@@ -1,81 +1,72 @@
-import { DEFAULT_SOUND_CLOUD_ARTWORK } from '@/constants/config';
-import {
-  soundCloudPlaylistRegex,
-  soundCloudTrackRegex,
-} from '@/constants/regex';
-import { Playlist } from '@/types/Playlist';
-import { Platform, Song } from '@/types/Song';
-import { SoundCloud } from 'scdl-core';
+import { scdl } from "../bot";
+import { soundcloudTrackRegex } from "../constant/regex";
+import { defaultSCArtWork } from "../constant/config";
+import { Platform, Playlist, Resource } from "./types";
 
-export const scdl = new SoundCloud();
+const searchTrack = async (keyword: string): Promise<string> => {
+  const res = await scdl.search({
+    query: keyword,
+    limit: 10,
+    offset: 0,
+    filter: "tracks",
+  });
 
-export class SoundCloudService {
-  public static async getTrackDetails(content: string): Promise<Song> {
-    let url = '';
-    const paths = content.match(soundCloudTrackRegex);
+  if (res.collection.length > 0) {
+    return res.collection[0].permalink_url;
+  } else {
+    throw "";
+  }
+};
+
+export const getTrackDetails = async (content: string): Promise<Resource> => {
+  let url = "";
+  try {
+    const paths = content.match(soundcloudTrackRegex);
     if (!paths) {
-      url = await this.searchTrack(content);
+      url = await searchTrack(content);
     } else {
       url = paths[0];
     }
-    if (!url) throw new Error();
     const track = await scdl.tracks.getTrack(url);
+
     if (track)
       return {
         title: track.title,
         length: track.duration / 1000,
         author: track.user.username,
-        thumbnail: track.artwork_url
-          ? track.artwork_url
-          : DEFAULT_SOUND_CLOUD_ARTWORK,
+        thumbnail: track.artwork_url ? track.artwork_url : defaultSCArtWork,
         url,
-        platform: Platform.SOUND_CLOUD,
+        platform: Platform.SOUNDCLOUD,
       };
-    throw new Error();
+    else throw "";
+  } catch (e) {
+    throw "❌ Can't find anything!";
   }
+};
 
-  public static async getPlaylist(url: string): Promise<Playlist> {
+export const getPlaylist = async (url: string): Promise<Playlist> => {
+  try {
     const playlist = await scdl.playlists.getPlaylist(url);
-    if (!playlist) if (!url) throw new Error();
-    const songs: Song[] = [];
+
+    const resources: Resource[] = [];
     playlist.tracks.forEach((track) => {
-      songs.push({
+      resources.push({
         title: track.title,
-        thumbnail: track.artwork_url
-          ? track.artwork_url
-          : DEFAULT_SOUND_CLOUD_ARTWORK,
+        thumbnail: track.artwork_url ? track.artwork_url : defaultSCArtWork,
         author: track.user.username,
         url: track.permalink_url,
         length: track.duration / 1000,
-        platform: Platform.SOUND_CLOUD,
+        platform: Platform.SOUNDCLOUD,
       });
     });
 
     return {
       title: `SoundCloud set ${playlist.id}`,
-      thumbnail: playlist.artwork_url
-        ? playlist.artwork_url
-        : DEFAULT_SOUND_CLOUD_ARTWORK,
+      thumbnail: playlist.artwork_url ? playlist.artwork_url : defaultSCArtWork,
       author: `${playlist.user.first_name} ${playlist.user.last_name}`,
-      songs,
+      resources,
     };
+  } catch (e) {
+    throw "❌ Invalid playlist!";
   }
-
-  public static isPlaylist(url: string): string | null {
-    const paths = url.match(soundCloudPlaylistRegex);
-    if (paths) return paths[0];
-    return null;
-  }
-
-  private static async searchTrack(keyword: string): Promise<string> {
-    const res = await scdl.search({
-      query: keyword,
-      filter: 'tracks',
-    });
-
-    if (res.collection.length > 0) {
-      return res.collection[0].permalink_url;
-    }
-    return '';
-  }
-}
+};
