@@ -11,7 +11,7 @@ import { scdl } from '@/services/soundcloud';
 import { Client, Intents } from 'discord.js';
 import log from 'fancy-log';
 import herokuAwake from 'heroku-awake';
-import http from 'http';
+import express, { Request, Response } from 'express';
 
 const client = new Client({
   intents: [
@@ -26,10 +26,16 @@ client.on('ready', () => {
   log.info(`> Bot is on ready as ${client?.user?.tag}`);
 });
 
-http.createServer().listen(PORT, async () => {
+const app = express();
+app.get('/', (_req: Request, res: Response) => {
+  return res.status(200).send({
+    message: 'Misabot is running',
+  });
+});
+
+app.listen(PORT, async () => {
   log.info(`> Server is listening on port ${PORT}`);
   herokuAwake(APP_URL);
-
   await client.login(TOKEN);
   await scdl.connect();
   run(client);
