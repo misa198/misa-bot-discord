@@ -1,6 +1,6 @@
-import { Constants } from 'discord.js';
+import { Constants, ApplicationCommandData } from 'discord.js';
 
-export const schema = [
+export const schema: ApplicationCommandData[] = [
   {
     name: 'play',
     description: 'Plays a song or playlist on Youtube',
@@ -62,5 +62,9 @@ export const schema = [
         required: true,
       },
     ],
+  },
+  {
+    name: 'help',
+    description: 'See the help for this bot',
   },
 ];

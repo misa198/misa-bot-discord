@@ -21,4 +21,5 @@ export default {
   yourQueue: '🎶 Your queue',
   invalidPosition: '❌ Invalid position!',
   jumpedTo: '⏩ Jumped to',
+  help: '💡 Help',
 };
