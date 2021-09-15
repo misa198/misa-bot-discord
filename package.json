@@ -6,6 +6,9 @@
   "repository": "https://github.com/Misabot/misabot-discord.git",
   "author": "Thanh Vu <misa198>",
   "license": "MIT",
+  "engines": {
+    "node": ">=16.6.0"
+  },
   "scripts": {
     "start": "NODE_ENV=production node dist/index.js",
     "build": "rm -rf dist && tsc",
