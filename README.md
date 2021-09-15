@@ -7,6 +7,12 @@
   </p>
 </p>
 
+## Overview
+
+Misabot is a Discord bot that plays music in voice channel. The bot is built on Discord.js v13.
+<br />
+For Discord.js v12, see [here](https://github.com/Misabot/misabot-discord/tree/v1)
+
 ## Docs
 
 | ID  | Name       | Description                                                       | Usage                    |
