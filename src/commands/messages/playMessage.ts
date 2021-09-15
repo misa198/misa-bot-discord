@@ -6,8 +6,8 @@ import {
 } from '@/constants/config';
 import messages from '@/constants/messages';
 import { Platform } from '@/types/Song';
+import { formatSeconds } from '@/utils/formatTime';
 import { EmbedFieldData, MessageEmbed } from 'discord.js';
-import moment from 'moment';
 
 export const createPlayMessage = (payload: {
   title: string;
@@ -29,9 +29,7 @@ export const createPlayMessage = (payload: {
     value:
       payload.type === 'Playlist'
         ? payload.length.toString()
-        : moment
-            .utc(payload.length * 1000)
-            .format(payload.length > 3600 ? 'HH:mm:ss' : 'mm:ss'),
+        : formatSeconds(payload.length),
     inline: true,
   };
   const type: EmbedFieldData = {
