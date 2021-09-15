@@ -5,6 +5,7 @@ import { leave } from './collections/leave';
 import { nowPlaying } from './collections/nowplaying';
 import { pause } from './collections/pause';
 import { play } from './collections/play';
+import { queue } from './collections/queue';
 import { resume } from './collections/resume';
 import { skip } from './collections/skip';
 import { soundcloud } from './collections/soundcloud';
@@ -36,6 +37,9 @@ export const run = (client: Client): void => {
           break;
         case nowPlaying.name:
           nowPlaying.execute(interaction);
+          break;
+        case queue.name:
+          queue.execute(interaction);
           break;
       }
     } catch (e) {

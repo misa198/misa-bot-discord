@@ -21,6 +21,7 @@
     "ffmpeg-static": "^4.4.0",
     "libsodium-wrappers": "^0.7.9",
     "moment": "^2.29.1",
+    "reconlx": "^2.4.3",
     "scdl-core": "^1.0.15",
     "ytdl-core": "^4.9.1",
     "ytpl": "^2.2.3",

@@ -17,4 +17,6 @@ export default {
   resumed: '▶ Resumed!',
   alreadyPlaying: '▶ Already playing!',
   leaved: '👋 Bye bye',
+  nothing: '🤷‍♂️ Nothing',
+  yourQueue: '🎶 Your queue',
 };
