@@ -30,7 +30,7 @@ For Discord.js v12, see [here](https://github.com/Misabot/misabot-discord/tree/v
 
 - Invite the bot to the server, then join a voice channel. Send `!deploy` to deploy the slash command for bot in the server
 
-## Deploy to heroku
+## Deploy to Heroku
 
 The bot can run continuously on Heroku without sleep. You need to setup 2 `Config Vars` in your Heroku app.
 
