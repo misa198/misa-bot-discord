@@ -13,6 +13,30 @@ Misabot is a Discord bot that plays music in voice channel. The bot is built on 
 <br />
 For Discord.js v12, see [here](https://github.com/Misabot/misabot-discord/tree/v1)
 
+## Using
+
+- Requirements: Node.js v16.6.0 or higher
+- ```bash
+  git clone https://github.com/Misabot/misabot-discord.git && \
+  cd misabot-discord
+  ```
+- Create .env file in root directory includes your Discord bot token. `TOKEN = <token>`
+
+- ```bash
+  yarn && \
+  yarn build && \
+  yarn start
+  ```
+
+- Invite the bot to the server, then join a voice channel. Send `!deploy` to deploy the slash command for bot in the server
+
+## Deploy to heroku
+
+The bot can run continuously on Heroku without sleep. You need to setup 2 `Config Vars` in your Heroku app.
+
+- `TOKEN = <bot token>`
+- `APP_URL = <your Heroku app URL>`
+
 ## Docs
 
 | ID  | Name       | Description                                                       | Usage                    |
