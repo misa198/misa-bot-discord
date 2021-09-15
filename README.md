@@ -57,7 +57,8 @@ The bot can run continuously on Heroku without sleep. You need to setup 2 `Confi
 | 8   | queue      | View songs in queue                                               | /queue                   |
 | 9   | jump       | Jump to song in queue by position                                 | /jump {position}         |
 | 10  | remove     | Remove song in queue by position                                  | /remove {position}       |
-| 11  | help       | See the help for this bot                                         | /help                    |
+| 11  | ping       | See the ping to server                                            | /ping                    |
+| 12  | help       | See the help for this bot                                         | /help                    |
 
 ## License
 

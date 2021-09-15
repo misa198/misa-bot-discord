@@ -6,6 +6,7 @@ import { jump } from './collections/jump';
 import { leave } from './collections/leave';
 import { nowPlaying } from './collections/nowplaying';
 import { pause } from './collections/pause';
+import { ping } from './collections/ping';
 import { play } from './collections/play';
 import { queue } from './collections/queue';
 import { remove } from './collections/remove';
@@ -47,11 +48,14 @@ export const run = (client: Client): void => {
         case jump.name:
           jump.execute(interaction);
           break;
-        case help.name:
-          help.execute(interaction);
+        case ping.name:
+          ping.execute(client, interaction);
           break;
         case remove.name:
           remove.execute(interaction);
+          break;
+        case help.name:
+          help.execute(interaction);
           break;
       }
     } catch (e) {

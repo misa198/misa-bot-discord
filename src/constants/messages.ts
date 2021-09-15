@@ -23,4 +23,5 @@ export default {
   jumpedTo: '⏩ Jumped to',
   removed: '🗑 Removed',
   help: '💡 Help',
+  ping: '📶 Ping',
 };

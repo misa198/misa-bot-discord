@@ -76,6 +76,10 @@ export const schema: ApplicationCommandData[] = [
     ],
   },
   {
+    name: 'ping',
+    description: 'See the ping to server',
+  },
+  {
     name: 'help',
     description: 'See the help for this bot',
   },
