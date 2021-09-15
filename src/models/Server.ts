@@ -34,9 +34,7 @@ export class Server {
     this.guildId = guildId;
 
     this.voiceConnection.on('stateChange', async (_, newState) => {
-      console.log(`Voice connection state changed to ${newState.status}`);
       if (newState.status === VoiceConnectionStatus.Disconnected) {
-        console.log(`Reason ${newState.reason}`);
         /*
           If the WebSocket closed with a 4014 code, this means that we should not manually attempt to reconnect,
           but there is a chance the connection will recover itself if the reason of the disconnect was due to

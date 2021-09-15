@@ -21,11 +21,17 @@ export const queue = {
     const embedMessages = createQueueMessages(server.queue);
     await interaction.editReply(messages.yourQueue);
 
-    await pagination({
-      embeds: embedMessages,
-      channel: interaction.channel as TextChannel,
-      author: interaction.user,
-      fastSkip: true,
-    });
+    if (
+      interaction &&
+      interaction.channel &&
+      interaction.channel instanceof TextChannel
+    ) {
+      await pagination({
+        embeds: embedMessages,
+        channel: interaction.channel as TextChannel,
+        author: interaction.user,
+        fastSkip: true,
+      });
+    }
   },
 };
