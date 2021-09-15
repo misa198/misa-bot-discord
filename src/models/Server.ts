@@ -145,6 +145,10 @@ export class Server {
     return target;
   }
 
+  public remove(position: number): QueueItem {
+    return this.queue.splice(position - 1, 1)[0];
+  }
+
   public async play(): Promise<void> {
     try {
       if (this.queue.length > 0) {

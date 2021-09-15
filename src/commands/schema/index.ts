@@ -64,6 +64,18 @@ export const schema: ApplicationCommandData[] = [
     ],
   },
   {
+    name: 'remove',
+    description: 'Remove song in queue by position',
+    options: [
+      {
+        name: 'position',
+        type: Constants.ApplicationCommandOptionTypes.NUMBER,
+        description: 'The position of song in queue',
+        required: true,
+      },
+    ],
+  },
+  {
     name: 'help',
     description: 'See the help for this bot',
   },

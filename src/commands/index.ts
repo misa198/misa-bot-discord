@@ -8,6 +8,7 @@ import { nowPlaying } from './collections/nowplaying';
 import { pause } from './collections/pause';
 import { play } from './collections/play';
 import { queue } from './collections/queue';
+import { remove } from './collections/remove';
 import { resume } from './collections/resume';
 import { skip } from './collections/skip';
 import { soundcloud } from './collections/soundcloud';
@@ -48,6 +49,9 @@ export const run = (client: Client): void => {
           break;
         case help.name:
           help.execute(interaction);
+          break;
+        case remove.name:
+          remove.execute(interaction);
           break;
       }
     } catch (e) {
