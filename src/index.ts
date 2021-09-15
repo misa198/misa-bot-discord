@@ -1,6 +1,10 @@
 import { config } from 'dotenv';
 config();
 
+if (process.env.NODE_ENV === 'production') {
+  require('module-alias/register');
+}
+
 import { run } from '@/commands';
 import { APP_URL, PORT, TOKEN } from '@/constants/config';
 import { scdl } from '@/services/soundcloud';
