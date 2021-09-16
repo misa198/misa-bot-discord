@@ -154,7 +154,11 @@ export class Server {
         let stream: any;
         const highWaterMark = 1024 * 1024 * 10;
         if (this.playing?.song.platform === Platform.YOUTUBE) {
-          stream = ytdl(this.playing.song.url, { highWaterMark });
+          stream = ytdl(this.playing.song.url, {
+            highWaterMark,
+            filter: 'audioonly',
+            quality: 'highestaudio',
+          });
         } else {
           stream = await scdl.download(this.playing.song.url, {
             highWaterMark,
