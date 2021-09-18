@@ -11,6 +11,7 @@ import { play } from './collections/play';
 import { queue } from './collections/queue';
 import { remove } from './collections/remove';
 import { resume } from './collections/resume';
+import { shuffle } from './collections/shuffle';
 import { skip } from './collections/skip';
 import { soundcloud } from './collections/soundcloud';
 
@@ -53,6 +54,9 @@ export const run = (client: Client): void => {
           break;
         case remove.name:
           remove.execute(interaction);
+          break;
+        case shuffle.name:
+          shuffle.execute(interaction);
           break;
         case help.name:
           help.execute(interaction);
