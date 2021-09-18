@@ -52,13 +52,14 @@ The bot can run continuously on Heroku without sleep. You need to setup 2 `Confi
 | 3   | pause      | Pause current song                                                | /pause                   |
 | 4   | resume     | Resume current song                                               | /resume                  |
 | 5   | skip       | Skip current song                                                 | /skip                    |
-| 6   | leave      | Stop and leave audio channel                                      | /leave                   |
-| 7   | nowplaying | Get current song info                                             | /nowplaying              |
+| 6   | nowplaying | Get current song info                                             | /nowplaying              |
+| 7   | shuffle    | Shuffle the queue                                                 | /shuffle                 |
 | 8   | queue      | View songs in queue                                               | /queue                   |
 | 9   | jump       | Jump to song in queue by position                                 | /jump {position}         |
 | 10  | remove     | Remove song in queue by position                                  | /remove {position}       |
 | 11  | ping       | See the ping to server                                            | /ping                    |
-| 12  | help       | See the help for this bot                                         | /help                    |
+| 12  | leave      | Stop and leave audio channel                                      | /leave                   |
+| 13  | help       | See the help for this bot                                         | /help                    |
 
 ## License
 
