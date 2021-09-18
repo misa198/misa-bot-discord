@@ -1,4 +1,5 @@
 # Misabot
+Discord music bot using Discord.js v12
 
 ## Invite Misabot
 Meet Misabot [here](https://misabotapp.herokuapp.com).
