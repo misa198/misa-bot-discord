@@ -44,12 +44,12 @@ export const schema: ApplicationCommandData[] = [
     description: 'Resume playback of the current song',
   },
   {
-    name: 'leave',
-    description: 'Leave the voice channel',
-  },
-  {
     name: 'nowplaying',
     description: 'See the song that is currently playing',
+  },
+  {
+    name: 'shuffle',
+    description: 'Shuffle the queue',
   },
   {
     name: 'jump',
@@ -80,11 +80,11 @@ export const schema: ApplicationCommandData[] = [
     description: 'See the ping to server',
   },
   {
-    name: 'help',
-    description: 'See the help for this bot',
+    name: 'leave',
+    description: 'Leave the voice channel',
   },
   {
-    name: 'shuffle',
-    description: 'Shuffle the queue',
+    name: 'help',
+    description: 'See the help for this bot',
   },
 ];
