@@ -83,4 +83,8 @@ export const schema: ApplicationCommandData[] = [
     name: 'help',
     description: 'See the help for this bot',
   },
+  {
+    name: 'shuffle',
+    description: 'Shuffle the queue',
+  },
 ];

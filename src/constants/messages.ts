@@ -24,4 +24,5 @@ export default {
   removed: '🗑 Removed',
   help: '💡 Help',
   ping: '📶 Ping',
+  shuffled: '🔀 Shuffled',
 };

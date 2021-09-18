@@ -11,6 +11,7 @@ import {
   VoiceConnectionDisconnectReason,
   VoiceConnectionStatus,
 } from '@discordjs/voice';
+import _ from 'lodash';
 import ytdl from 'ytdl-core';
 
 export interface QueueItem {
@@ -145,6 +146,10 @@ export class Server {
 
   public remove(position: number): QueueItem {
     return this.queue.splice(position - 1, 1)[0];
+  }
+
+  public shuffle(): void {
+    this.queue = _.shuffle(this.queue);
   }
 
   public async play(): Promise<void> {
