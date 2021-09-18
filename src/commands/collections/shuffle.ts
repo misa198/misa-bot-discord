@@ -13,6 +13,7 @@ export const shuffle = {
     }
     if (server.queue.length === 0) {
       await interaction.followUp(messages.noSongsInQueue);
+      return;
     }
     server.shuffle();
     await interaction.followUp(messages.shuffled);
